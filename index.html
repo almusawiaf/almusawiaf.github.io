@@ -4,171 +4,227 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahmad F. Al Musawi - Profile</title>
+    <title>Ahmad F. Al Musawi - Academic Profile</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(to bottom, #eef2f3, #8e9eab);
             margin: 0;
             padding: 0;
             color: #333;
+            background-color: #f8f9fa;
         }
 
         .container {
-            max-width: 1000px;
-            margin: 0 auto;
+            width: 80%;
+            margin: auto;
             padding: 20px;
-            background: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        h1 {
+        header {
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px 0;
             text-align: center;
-            color: #4CAF50;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 1.2em;
+        }
+
+        nav {
+            background-color: #495057;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav a {
+            padding: 14px 20px;
+            display: block;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        nav a:hover {
+            background-color: #6c757d;
+        }
+
+        section {
+            margin: 40px 0;
         }
 
         h2 {
-            color: #007BFF;
-            margin-top: 40px;
-        }
-
-        p {
-            line-height: 1.6;
-        }
-
-        .contact-links a {
-            color: #007BFF;
-            text-decoration: none;
-            margin-right: 15px;
-        }
-
-        .contact-links a:hover {
-            text-decoration: underline;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
         }
 
         ul {
-            margin-left: 20px;
+            list-style: none;
+            padding: 0;
         }
 
         ul li {
-            margin: 10px 0;
+            margin-bottom: 10px;
         }
 
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        .skills div {
-            flex: 1 1 calc(33.333% - 20px);
-            background: #f9f9f9;
-            margin: 10px;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .skills div:hover {
-            background: #f1f1f1;
-        }
-
-        .footer {
+        footer {
+            background-color: #343a40;
+            color: #fff;
             text-align: center;
-            margin-top: 40px;
-            padding: 10px;
-            background: #4CAF50;
-            color: white;
-            border-radius: 10px;
+            padding: 10px 0;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
+    <header>
         <h1>Ahmad F. Al Musawi</h1>
-        <p><strong>Email:</strong> almusawiaf@vcu.edu, almusawiaf@utq.edu.iq</p>
-        <p class="contact-links">
-            🔗 <a href="https://www.researchgate.net/profile/Ahmad_Al_Musawi" target="_blank">ResearchGate</a>
-            🔗 <a href="https://scholar.google.com/citations?user=QJYj-n4AAAAJ&hl=en&oi=ao" target="_blank">Google
-                Scholar</a>
-            🔗 <a href="https://www.linkedin.com/in/ahmad-f-al-musawi-577410141/" target="_blank">LinkedIn</a>
-            🔗 <a href="https://www.youtube.com/@new_ur_academy" target="_blank">YouTube</a>
+        <p>
+            🔗 <a href="https://www.researchgate.net/profile/Ahmad_Al_Musawi" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/ResearchGate_icon_SVG.svg"
+                    alt="ResearchGate" style="width: 20px; vertical-align: middle; margin-right: 8px;">
+                ResearchGate
+            </a>
+            🔗 <a href="https://scholar.google.com/citations?user=QJYj-n4AAAAJ&hl=en&oi=ao" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Google_Scholar_logo.svg"
+                    alt="Google Scholar" style="width: 20px; vertical-align: middle; margin-right: 8px;">
+                Google Scholar
+            </a>
+            🔗 <a href="https://www.linkedin.com/in/ahmad-f-al-musawi-577410141/" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn"
+                    style="width: 20px; vertical-align: middle; margin-right: 8px;">
+                LinkedIn
+            </a>
+            🔗 <a href="https://www.youtube.com/@AhmadFAlMusawi" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png"
+                    alt="YouTube" style="width: 20px; vertical-align: middle; margin-right: 8px;">
+                YouTube
+            </a>
         </p>
+        <p><strong>Email:</strong> almusawiaf@vcu.edu, almusawiaf@utq.edu.iq</p>
+    </header>
 
-        <h2>Education</h2>
-        <ul>
-            <li><strong>Ph.D. candidate in Computer Science</strong>, Virginia Commonwealth University (Jan 2023 -
-                Current)</li>
-            <li><strong>M.Sc. in Computer Science</strong>, Virginia Commonwealth University (May 2013)<br>
-                <em>Advisor:</em> Dr. Preetam Ghosh<br>
-                <em>Title:</em> Complex Network Growing Model Using Downlink Motifs
-            </li>
-            <li><strong>B.Sc. in Computer Science</strong>, University of Thi Qar (June 2005)<br>
-                <em>Advisor:</em> Dr. Emad Ali<br>
-                <em>Title:</em> 3D Game Programming Using Visual Basic 6.0 and DirectX 8.0
-            </li>
-        </ul>
+    <nav>
+        <a href="#bio">Bio</a>
+        <a href="#education">Education</a>
+        <a href="#employment">Employment</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#publications">Publications</a>
+    </nav>
 
-        <h2>Employment</h2>
-        <ul>
-            <li><strong>Senior Lecturer</strong>, Computer Science Department, University of Thi Qar (2013 - 2023)</li>
-            <li><strong>Research Assistant and Programmer</strong>, University of Thi Qar (2005 - 2013)</li>
-        </ul>
+    <div class="container">
 
-        <h2>Projects</h2>
-        <ul>
-            <li>Developed a website system for handling vehicle registrations and traffic violation tickets in 2013.
-            </li>
-            <li>Created a website system for the Museum of Thi Qar in 2015.</li>
-            <li>Designed the first official website for the University of Thi Qar in 2005.</li>
-            <li>Developed "University of Thi Qar Human Resources and Salaries System" in 2006.</li>
-        </ul>
+        <section id="bio">
+            <h2>Bio</h2>
+            <div style="display: flex; gap: 20px; align-items: center;">
+                <div style="flex: 1; text-align: center;">
+                    <img src="ahmad.jpg" alt="Ahmad F. Al Musawi"
+                        style="border-radius: 50%; width: 200px; height: 200px; object-fit: cover;">
+                </div>
+                <div style="flex: 2;">
+                    <p> I am a Ph.D. Candidate in Computer Science at Virginia Commonwealth University. 
+                        My research focuses on network science, machine learning, and their transformative applications in healthcare and systems biology. 
+                        With over a decade of experience as a Senior Lecturer and Programmer, 
+                        I have had the privilege of contributing to several software and research projects and publishing my work in reputable journals and conferences. 
+                        I am deeply passionate about advancing precision medicine through computational techniques.</p>
+                </div>
+            </div>
+        </section>
 
-        <h2>Skills</h2>
-        <div class="skills">
-            <div><strong>Data Science:</strong> Python, SQL, Java, Hadoop, PyTorch, C/C++</div>
-            <div><strong>Web Development:</strong> HTML, CSS, JavaScript, Angular, Node.js, PHP, MySQL</div>
-            <div><strong>Others:</strong> Visual Basic, MS Office, Blender, Adobe Premier</div>
-        </div>
+        <section id="education">
+            <h2>Education</h2>
+            <ul>
+                <li><strong>Ph.D. candidate in Computer Science</strong>, Virginia Commonwealth University (Jan 2023 -
+                    Current)</li>
+                <li><strong>M.Sc. in Computer Science</strong>, Virginia Commonwealth University (May 2013)<br>
+                    <em>Advisor:</em> Dr. Preetam Ghosh<br>
+                    <em>Title:</em> Complex Network Growing Model Using Downlink Motifs
+                </li>
+                <li><strong>B.Sc. in Computer Science</strong>, University of Thi Qar (June 2005)<br>
+                    <em>Advisor:</em> Dr. Emad Ali<br>
+                    <em>Title:</em> 3D Game Programming Using Visual Basic 6.0 and DirectX 8.0
+                </li>
+            </ul>
+        </section>
 
-        <h2>Publications</h2>
-        <ul>
-            <li>"A Review of Link Prediction Applications in Network Biology", arXiv preprint arXiv:2312.01275, 2023.
-            </li>
-            <li>"Examining indicators of complex network vulnerability across diverse attack scenarios", Scientific
-                Reports, vol. 13, 2023.</li>
-            <li>"Inferring links in directed complex networks through feed-forward loop motifs", Humanities and Social
-                Sciences Communications, vol. 10, 2023.</li>
-            <li>"Cost-effective vaccine provisioning using coalitional game theory", 2022 IEEE International Conference
-                on Bioinformatics and Biomedicine (BIBM), pp. 795-798, 2022.</li>
-            <li>"Identifying accurate link predictors based on assortativity of complex networks", Scientific Reports,
-                vol. 12, no. 1, p. 18107, 2022.</li>
-            <li>"Students Groups Detection in Online Examinations Using K-Means Clustering", University of Thi-Qar
-                Journal, vol. 17, no. 4, 2022.</li>
-            <li>"Intrinsic and Simplified Complex Network Embedding Model", Next Generation of Internet of Things:
-                Proceedings of ICNGIoT 2021, pp. 269-288, 2021.</li>
-            <li>"Application of Social Network Analytics to Assessing Different Care Coordination Metrics", Social
-                Computing and Social Media. Technologies and Analytics: 10th International Conference, SCSM 2018, pp.
-                151-160, 2018.</li>
-            <li>"Computer Science Approaches for Counterterrorism", International Journal of Innovative Engineering and
-                Emerging Technology, vol. 2, no. 4, pp. 19-25, 2016.</li>
-            <li>"Transcriptional Network Growing Models Using Motif-Based Preferential Attachment", Frontiers in
-                Bioengineering and Biotechnology, vol. 3, article 157, 2015.</li>
-            <li>"Incoming, Outgoing Degree and Importance Analysis of Network Motifs", International Journal of Computer
-                Science and Mobile Computing, vol. 4, no. 6, pp. 758-767, 2015.</li>
-            <li>"Toward A Comprehensive Terrorist Prediction in Social Network", International Journal Of Engineering
-                Sciences Research Technology, vol. 4, pp. 251-257, 2015.</li>
-            <li>"Care Coordination Metrics of Patients Sharing Among Physicians: A Social Network Analytic Approach",
-                Proceedings of the 5th ACM Conference on Bioinformatics, Computational Biology, and Health Informatics,
-                pp. 635-636, 2014.</li>
-            <li>"Complex Network Growing Model Using Downlink Motifs", 2013.</li>
-        </ul>
+        <section id="employment">
+            <h2>Employment</h2>
+            <ul>
+                <li><strong>Senior Lecturer</strong>, Computer Science Department, University of Thi Qar (2013 - 2023)
+                </li>
+                <li><strong>Research Assistant and Programmer</strong>, University of Thi Qar (2005 - 2013)</li>
+            </ul>
+        </section>
 
-        <div class="footer">
-            &copy; 2025 Ahmad F. Al Musawi | All rights reserved.
-        </div>
+        <section id="projects">
+            <h2>Projects</h2>
+            <ul>
+                <li>Developed a website system for handling vehicle registrations and traffic violation tickets in 2013.
+                </li>
+                <li>Created a website system for the Museum of Thi Qar in 2015.</li>
+                <li>Designed the first official website for the University of Thi Qar in 2005.</li>
+                <li>Developed "University of Thi Qar Human Resources and Salaries System" in 2006.</li>
+            </ul>
+        </section>
+
+        <section id="skills">
+            <h2>Skills</h2>
+            <ul>
+                <li><strong>Data Science:</strong> Python, SQL, Java, Hadoop, PyTorch, C/C++</li>
+                <li><strong>Web Development:</strong> HTML, CSS, JavaScript, Angular, Node.js, PHP, MySQL</li>
+                <li><strong>Others:</strong> Visual Basic, MS Office, Blender, Adobe Premier</li>
+            </ul>
+        </section>
+
+        <section id="publications">
+            <h2>Publications</h2>
+            <ul>
+                <li>"A Review of Link Prediction Applications in Network Biology", arXiv preprint arXiv:2312.01275,
+                    2023.</li>
+                <li>"Examining indicators of complex network vulnerability across diverse attack scenarios", Scientific
+                    Reports, vol. 13, 2023.</li>
+                <li>"Inferring links in directed complex networks through feed-forward loop motifs", Humanities and
+                    Social Sciences Communications, vol. 10, 2023.</li>
+                <li>"Cost-effective vaccine provisioning using coalitional game theory", 2022 IEEE International
+                    Conference on Bioinformatics and Biomedicine (BIBM), pp. 795-798, 2022.</li>
+                <li>"Identifying accurate link predictors based on assortativity of complex networks", Scientific
+                    Reports, vol. 12, no. 1, p. 18107, 2022.</li>
+                <li>"Students Groups Detection in Online Examinations Using K-Means Clustering", University of Thi-Qar
+                    Journal, vol. 17, no. 4, 2022.</li>
+                <li>"Intrinsic and Simplified Complex Network Embedding Model", Next Generation of Internet of Things:
+                    Proceedings of ICNGIoT 2021, pp. 269-288, 2021.</li>
+                <li>"Application of Social Network Analytics to Assessing Different Care Coordination Metrics", Social
+                    Computing and Social Media. Technologies and Analytics: 10th International Conference, SCSM 2018,
+                    pp. 151-160, 2018.</li>
+                <li>"Computer Science Approaches for Counterterrorism", International Journal of Innovative Engineering
+                    and Emerging Technology, vol. 2, no. 4, pp. 19-25, 2016.</li>
+                <li>"Transcriptional Network Growing Models Using Motif-Based Preferential Attachment", Frontiers in
+                    Bioengineering and Biotechnology, vol. 3, article 157, 2015.</li>
+                <li>"Incoming, Outgoing Degree and Importance Analysis of Network Motifs", International Journal of
+                    Computer Science and Mobile Computing, vol. 4, no. 6, pp. 758-767, 2015.</li>
+                <li>"Toward A Comprehensive Terrorist Prediction in Social Network", International Journal Of
+                    Engineering Sciences Research Technology, vol. 4, pp. 251-257, 2015.</li>
+                <li>"Care Coordination Metrics of Patients Sharing Among Physicians: A Social Network Analytic
+                    Approach", Proceedings of the 5th ACM Conference on Bioinformatics, Computational Biology, and
+                    Health Informatics, pp. 635-636, 2014.</li>
+                <li>"Complex Network Growing Model Using Downlink Motifs", 2013.</li>
+            </ul>
+        </section>
+
     </div>
+
+    <footer>
+        <p>&copy; 2025 Ahmad F. Al Musawi | All rights reserved.</p>
+    </footer>
 </body>
 
 </html>
