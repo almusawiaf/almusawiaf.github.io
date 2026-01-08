@@ -1,172 +1,291 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahmad F. Al Musawi - Academic Profile</title>
+    <title>Ahmad F. Al Musawi | Academic Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        /* General Styling */
+        :root {
+            --primary: #0f172a; /* Deep Slate Blue */
+            --secondary: #334155;
+            --accent: #2563eb; /* Modern Blue */
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
         }
 
-        .container {
-            width: 90%;
-            max-width: 1200px;
+        /* Sticky Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .nav-container {
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
         }
 
-        /* Header Section */
+        nav a {
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        /* Header / Hero */
         header {
-            background-color: #003566;
-            color: #fff;
+            background: linear-gradient(135deg, var(--primary) 0%, #1e293b 100%);
+            color: white;
+            padding: 80px 20px;
             text-align: center;
-            padding: 30px 0;
-            margin-bottom: 20px;
         }
 
         header h1 {
             margin: 0;
-            font-size: 2.8em;
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -1px;
         }
 
-        header p {
-            margin: 10px 0 0;
-            font-size: 1.2em;
+        .header-links {
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
-        header a {
-            color: #ffd60a;
+        .header-links a {
+            color: rgba(255, 255, 255, 0.9);
             text-decoration: none;
-            margin: 0 10px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        header a:hover {
-            text-decoration: underline;
+        .header-links a:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
         }
 
-        /* Navigation Bar */
-        nav {
-            background-color: #001d3d;
-            padding: 10px 0;
-            text-align: center;
-            margin-bottom: 20px;
+        .contact-info {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #cbd5e1;
         }
 
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 15px;
-            font-weight: bold;
-            font-size: 1.1em;
+        /* Main Content */
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
         }
 
-        nav a:hover {
-            color: #ffd60a;
-        }
-
-        /* Section Styling */
         section {
-            background-color: #fff;
-            margin: 20px 0;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background: var(--card-bg);
+            padding: 40px;
+            margin-bottom: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
         }
 
-        section h2 {
-            font-size: 1.8em;
-            margin-bottom: 15px;
-            color: #003566;
-            border-bottom: 2px solid #ffd60a;
-            padding-bottom: 5px;
+        h2 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-top: 0;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        section ul {
+        h2::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #e2e8f0;
+        }
+
+        /* Bio Specific */
+        .bio-grid {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .bio-grid img {
+            width: 180px;
+            height: 180px;
+            border-radius: 24px;
+            object-fit: cover;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Lists Styling */
+        ul {
             list-style: none;
             padding: 0;
         }
 
-        section ul li {
-            margin-bottom: 10px;
+        li {
+            margin-bottom: 20px;
+            position: relative;
         }
 
-        /* Bio Section */
-        #bio {
+        .item-title {
+            font-weight: 600;
+            color: var(--primary);
+            display: block;
+        }
+
+        .item-meta {
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .item-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+            display: block;
+        }
+
+        /* Skills Tag Cloud */
+        .skills-container {
             display: flex;
-            align-items: center;
-            gap: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
-        #bio img {
-            border-radius: 50%;
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border: 3px solid #ffd60a;
+        .skill-tag {
+            background: #f1f5f9;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: var(--secondary);
+            font-weight: 500;
         }
 
-        #bio div {
-            flex: 1;
+        /* Publication Specific */
+        .pub-list li {
+            padding-left: 20px;
+            border-left: 2px solid #e2e8f0;
+            transition: border-color 0.3s;
         }
 
-        /* Footer Styling */
+        .pub-list li:hover {
+            border-left-color: var(--accent);
+        }
+
         footer {
-            background-color: #003566;
-            color: #fff;
             text-align: center;
-            padding: 15px 0;
-            margin-top: 20px;
+            padding: 60px 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .bio-grid { grid-template-columns: 1fr; text-align: center; }
+            .bio-grid img { margin: 0 auto; }
+            header h1 { font-size: 2.2rem; }
+            .nav-container { gap: 10px; font-size: 0.8rem; flex-wrap: wrap; }
         }
     </style>
 </head>
 
 <body>
-    <header>
-        <h1>Ahmad F. Al Musawi</h1>
-        <p>
-            🔗 <a href="https://scholar.google.com/citations?user=QJYj-n4AAAAJ&hl=en&oi=ao" target="_blank">Google Scholar</a>
-            🔗 <a href="https://www.researchgate.net/profile/Ahmad_Al_Musawi" target="_blank">ResearchGate</a>
-            🔗 <a href="https://www.linkedin.com/in/ahmad-f-al-musawi-577410141/" target="_blank">LinkedIn</a>
-            🔗 <a href="https://www.youtube.com/@new_ur_academy" target="_blank">YouTube</a>
-        </p>
-        <p><strong>Email:</strong> almusawiaf@vcu.edu, almusawiaf@utq.edu.iq</p>
-    </header>
 
     <nav>
-        <a href="#bio">Bio</a>
-        <a href="#education">Education</a>
-        <a href="#employment">Employment</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#publications">Publications</a>
+        <div class="nav-container">
+            <a href="#bio">About</a>
+            <a href="#education">Education</a>
+            <a href="#employment">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#publications">Publications</a>
+        </div>
     </nav>
+
+    <header>
+        <h1>Ahmad F. Al Musawi</h1>
+        <div class="contact-info">
+            <i class="fa-regular fa-envelope"></i> almusawiaf@vcu.edu &nbsp;|&nbsp; 
+            <i class="fa-regular fa-envelope"></i> almusawiaf@utq.edu.iq
+        </div>
+        <div class="header-links">
+            <a href="https://scholar.google.com/citations?user=QJYj-n4AAAAJ" target="_blank"><i class="fa-grad fa-graduation-cap"></i> Google Scholar</a>
+            <a href="https://www.researchgate.net/profile/Ahmad_Al_Musawi" target="_blank"><i class="fab fa-researchgate"></i> ResearchGate</a>
+            <a href="https://www.linkedin.com/in/ahmad-f-al-musawi-577410141/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            <a href="https://www.youtube.com/@new_ur_academy" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+        </div>
+    </header>
 
     <div class="container">
         <section id="bio">
-            <img src="ahmad.jpg" alt="Ahmad F. Al Musawi">
-            <div>
-                <p>I am a Ph.D. Candidate in Computer Science at Virginia Commonwealth University. My research focuses on network science, machine learning, and their transformative applications in healthcare and systems biology. With over a decade of experience as a Senior Lecturer and Programmer, I have contributed to several software and research projects and published my work in reputable journals and conferences. I am deeply passionate about advancing precision medicine through computational techniques.</p>
+            <div class="bio-grid">
+                <img src="ahmad.jpg" alt="Ahmad F. Al Musawi">
+                <div>
+                    <p>I am a <strong>Ph.D. Candidate in Computer Science</strong> at Virginia Commonwealth University. My research focuses on network science, machine learning, and their transformative applications in healthcare and systems biology.</p>
+                    <p>With over a decade of experience as a Senior Lecturer and Programmer, I have contributed to several software and research projects and published my work in reputable journals and conferences. I am deeply passionate about advancing precision medicine through computational techniques.</p>
+                </div>
             </div>
         </section>
 
         <section id="education">
             <h2>Education</h2>
             <ul>
-                <li><strong>Ph.D. candidate in Computer Science</strong>, Virginia Commonwealth University (Jan 2023 - Current)</li>
-                <li><strong>M.Sc. in Computer Science</strong>, Virginia Commonwealth University (May 2013)<br>
-                    <em>Advisor:</em> Dr. Preetam Ghosh<br>
-                    <em>Title:</em> Complex Network Growing Model Using Downlink Motifs
+                <li>
+                    <span class="item-meta">2023 — Present</span>
+                    <span class="item-title">Ph.D. in Computer Science</span>
+                    <span class="item-desc">Virginia Commonwealth University</span>
                 </li>
-                <li><strong>B.Sc. in Computer Science</strong>, University of Thi Qar (June 2005)<br>
-                    <em>Advisor:</em> Dr. Emad Ali<br>
-                    <em>Title:</em> 3D Game Programming Using Visual Basic 6.0 and DirectX 8.0
+                <li>
+                    <span class="item-meta">2013</span>
+                    <span class="item-title">M.Sc. in Computer Science</span>
+                    <span class="item-desc">Virginia Commonwealth University. Advisor: Dr. Preetam Ghosh</span>
+                </li>
+                <li>
+                    <span class="item-meta">2005</span>
+                    <span class="item-title">B.Sc. in Computer Science</span>
+                    <span class="item-desc">University of Thi Qar. Advisor: Dr. Emad Ali</span>
                 </li>
             </ul>
         </section>
@@ -174,54 +293,61 @@
         <section id="employment">
             <h2>Employment</h2>
             <ul>
-                <li><strong>Senior Lecturer</strong>, Computer Science Department, University of Thi Qar (2013 - 2023)</li>
-                <li><strong>Research Assistant and Programmer</strong>, University of Thi Qar (2005 - 2013)</li>
-            </ul>
-        </section>
-
-        <section id="projects">
-            <h2>Projects</h2>
-            <ul>
-                <li>Developed a website system for handling vehicle registrations and traffic violation tickets in 2013.</li>
-                <li>Created a website system for the Museum of Thi Qar in 2015.</li>
-                <li>Designed the first official website for the University of Thi Qar in 2005.</li>
-                <li>Developed "University of Thi Qar Human Resources and Salaries System" in 2006.</li>
+                <li>
+                    <span class="item-meta">2013 — 2023</span>
+                    <span class="item-title">Senior Lecturer</span>
+                    <span class="item-desc">Computer Science Department, University of Thi Qar</span>
+                </li>
+                <li>
+                    <span class="item-meta">2005 — 2013</span>
+                    <span class="item-title">Research Assistant & Programmer</span>
+                    <span class="item-desc">University of Thi Qar</span>
+                </li>
             </ul>
         </section>
 
         <section id="skills">
-            <h2>Skills</h2>
-            <ul>
-                <li><strong>Data Science:</strong> Python, SQL and NoSQL, Java, Hadoop, PyTorch, C/C++</li>
-                <li><strong>Web Development:</strong> HTML, CSS, JavaScript, Angular, Node.js, PHP, MySQL</li>
-                <li><strong>Others:</strong> Visual Basic, MS Office, Blender, Adobe Premier</li>
-            </ul>
+            <h2>Technical Skills</h2>
+            <div class="skills-container">
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">PyTorch</span>
+                <span class="skill-tag">Data Science</span>
+                <span class="skill-tag">SQL & NoSQL</span>
+                <span class="skill-tag">Hadoop</span>
+                <span class="skill-tag">C/C++</span>
+                <span class="skill-tag">Java</span>
+                <span class="skill-tag">Angular</span>
+                <span class="skill-tag">Node.js</span>
+                <span class="skill-tag">PHP</span>
+                <span class="skill-tag">Blender</span>
+            </div>
         </section>
 
         <section id="publications">
-            <h2>Publications</h2>
-            <ul>
-                <li>"A Review of Link Prediction Applications in Network Biology", arXiv preprint arXiv:2312.01275, 2023.</li>
-                <li>"Examining indicators of complex network vulnerability across diverse attack scenarios", Scientific Reports, vol. 13, 2023.</li>
-                <li>"Inferring links in directed complex networks through feed-forward loop motifs", Humanities and Social Sciences Communications, vol. 10, 2023.</li>
-                <li>"Cost-effective vaccine provisioning using coalitional game theory", 2022 IEEE International Conference on Bioinformatics and Biomedicine (BIBM), pp. 795-798, 2022.</li>
-                <li>"Identifying accurate link predictors based on assortativity of complex networks", Scientific Reports, vol. 12, no. 1, p. 18107, 2022.</li>
-                <li>"Students Groups Detection in Online Examinations Using K-Means Clustering", University of Thi-Qar Journal, vol. 17, no. 4, 2022.</li>
-                <li>"Intrinsic and Simplified Complex Network Embedding Model", Next Generation of Internet of Things: Proceedings of ICNGIoT 2021, pp. 269-288, 2021.</li>
-                <li>"Application of Social Network Analytics to Assessing Different Care Coordination Metrics", Social Computing and Social Media. Technologies and Analytics: 10th International Conference, SCSM 2018, pp. 151-160, 2018.</li>
-                <li>"Computer Science Approaches for Counterterrorism", International Journal of Innovative Engineering and Emerging Technology, vol. 2, no. 4, pp. 19-25, 2016.</li>
-                <li>"Transcriptional Network Growing Models Using Motif-Based Preferential Attachment", Frontiers in Bioengineering and Biotechnology, vol. 3, article 157, 2015.</li>
-                <li>"Incoming, Outgoing Degree and Importance Analysis of Network Motifs", International Journal of Computer Science and Mobile Computing, vol. 4, no. 6, pp. 758-767, 2015.</li>
-                <li>"Toward A Comprehensive Terrorist Prediction in Social Network", International Journal Of Engineering Sciences Research Technology, vol. 4, pp. 251-257, 2015.</li>
-                <li>"Care Coordination Metrics of Patients Sharing Among Physicians: A Social Network Analytic Approach", Proceedings of the 5th ACM Conference on Bioinformatics, Computational Biology, and Health Informatics, pp. 635-636, 2014.</li>
-                <li>"Complex Network Growing Model Using Downlink Motifs", 2013.</li>
-            </ul>
+            <h2>Selected Publications</h2>
+            <ul class="pub-list">
+                <li>
+                    <span class="item-title">"A Review of Link Prediction Applications in Network Biology"</span>
+                    <span class="item-desc">arXiv preprint arXiv:2312.01275, 2023.</span>
+                </li>
+                <li>
+                    <span class="item-title">"Examining indicators of complex network vulnerability across diverse attack scenarios"</span>
+                    <span class="item-desc">Scientific Reports, vol. 13, 2023.</span>
+                </li>
+                <li>
+                    <span class="item-title">"Inferring links in directed complex networks through feed-forward loop motifs"</span>
+                    <span class="item-desc">Humanities and Social Sciences Communications, vol. 10, 2023.</span>
+                </li>
+                </ul>
+            <p style="text-align: center; margin-top: 20px;">
+                <a href="https://scholar.google.com/citations?user=QJYj-n4AAAAJ" target="_blank" style="color: var(--accent); text-decoration: none; font-weight: 600;">View all publications on Google Scholar &rarr;</a>
+            </p>
         </section>
     </div>
 
     <footer>
-        <p>&copy; 2025 Ahmad F. Al Musawi | All rights reserved.</p>
+        <p>&copy; 2026 Ahmad F. Al Musawi. Built for performance and clarity.</p>
     </footer>
-</body>
 
+</body>
 </html>
