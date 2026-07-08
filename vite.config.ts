@@ -4,11 +4,10 @@ import path from 'path';
 import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
-  const repoName = process.env.GITHUB_REPOSITORY ? process.env.GITHUB_REPOSITORY.split('/')[1] : '';
-  const isUserOrgPages = repoName.toLowerCase().endsWith('.github.io');
-  const base = process.env.GITHUB_REPOSITORY
-    ? (isUserOrgPages ? '/' : `/${repoName}/`)
-    : './';
+  // Using a relative base path ('./') is the most bulletproof configuration for GitHub Pages.
+  // It ensures assets resolve correctly whether hosted as a User page (username.github.io),
+  // a Project subfolder page (username.github.io/repo-name), or on a Custom Domain.
+  const base = './';
 
   return {
     base,
