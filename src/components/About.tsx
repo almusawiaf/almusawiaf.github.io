@@ -1,36 +1,74 @@
 import React from "react";
-import { ACADEMIC_STATS, SKILL_CATEGORIES } from "../types";
-import { Award, BookOpen, Layers, Users } from "lucide-react";
+import { Award } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function About() {
+  const { t, isRTL } = useLanguage();
+
+  const skillCategories = [
+    {
+      title: t.skills.aiMl,
+      skills: ["Graph Neural Networks (GNNs)", "Deep Learning", "Supervised/Unsupervised Learning", "PyTorch", "Scikit-Learn", "Patient Similarity Networks"],
+    },
+    {
+      title: t.skills.netSci,
+      skills: ["Complex Network Modeling", "Link Prediction Algorithms", "Graph Theory", "Motif-based Attachment", "Network Vulnerability Analysis", "Social Network Analysis"],
+    },
+    {
+      title: t.skills.dataSci,
+      skills: ["Python", "SQL & NoSQL Databases", "Big Data (Hadoop)", "R", "Feature Engineering", "Heterogeneous Data Integration"],
+    },
+    {
+      title: t.skills.softwareEng,
+      skills: ["C / C++", "Java", "Node.js", "Angular", "PHP", "Git / Version Control", "Blender (3D Modeling)"],
+    },
+  ];
+
+  const academicStats = [
+    {
+      label: t.stats.totalPubsLabel,
+      value: t.stats.totalPubsValue,
+      description: t.stats.totalPubsDesc,
+    },
+    {
+      label: t.stats.citationsLabel,
+      value: t.stats.citationsValue,
+      description: t.stats.citationsDesc,
+    },
+    {
+      label: t.stats.hIndexLabel,
+      value: t.stats.hIndexValue,
+      description: t.stats.hIndexDesc,
+    },
+    {
+      label: t.stats.experienceLabel,
+      value: t.stats.experienceValue,
+      description: t.stats.experienceDesc,
+    },
+  ];
+
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+    <div id="bio" className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8 scroll-mt-24">
       {/* Narrative & Skills */}
       <div className="lg:col-span-8 bg-[#111112] border border-white/5 rounded-2xl p-6 md:p-8 shadow-sm flex flex-col justify-between">
         <div>
           <h3 className="text-2xl font-display font-semibold tracking-tight text-slate-100 mb-4">
-            Research & Bio
+            {t.about.title}
           </h3>
           <div className="space-y-4 text-slate-300 text-sm md:text-base leading-relaxed">
-            <p>
-              I hold a <strong className="text-accent-blue font-semibold">Ph.D. in Computer Science</strong> from Virginia Commonwealth University (VCU), where my research centered at the intersection of <strong className="text-accent-blue font-semibold">Network Science, Graph Neural Networks (GNNs), and Clinical Machine Learning</strong>. My doctoral dissertation, advised by Dr. Preetam Ghosh, formulated innovative machine learning architectures leveraging Patient Similarity Networks (PSNs) and clinical temporality to predict chronic disease trajectories and optimize critical hospital resource allocation.
-            </p>
-            <p>
-              Over the last decade, I have served as a <strong className="text-slate-100 font-semibold">Senior Lecturer</strong> at the University of Thi-Qar, leading courses in AI, network theory, and software development, and mentoring hundreds of undergraduate students. My software engineering roots span from robust full-stack platforms to specialized mathematical solvers and complex simulation environments.
-            </p>
-            <p>
-              My current research efforts focus on advancing <strong className="text-accent-blue font-semibold">precision medicine</strong>. By translating complex, multi-modal electronic health records (EHRs like MIMIC-III) into interconnected graph structures, I deploy Graph Neural Networks (GNNs) to forecast ICU length of stay, survival coefficients, and therapeutic outcomes with superior transparency and predictive power.
-            </p>
+            <p>{t.about.p1}</p>
+            <p>{t.about.p2}</p>
+            <p>{t.about.p3}</p>
           </div>
         </div>
 
         {/* Technical Skills Catalog */}
         <div className="mt-8 pt-6 border-t border-white/5">
           <h4 className="text-xs font-mono tracking-wider text-slate-500 uppercase mb-4">
-            Technical & Research Capabilities
+            {t.about.capabilitiesTitle}
           </h4>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {SKILL_CATEGORIES.map((category, idx) => (
+            {skillCategories.map((category, idx) => (
               <div key={idx} className="space-y-2">
                 <h5 className="text-xs font-display font-semibold text-slate-300 flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-accent-blue"></span>
@@ -54,18 +92,20 @@ export default function About() {
 
       {/* Visual Stats Column */}
       <div className="lg:col-span-4 flex flex-col gap-6">
-        {/* Quick Stats Grid with Custom Sophisticated Dark Background and Gold Accents */}
         <div className="bg-[#161618] text-[#F0F0F0] rounded-2xl p-6 md:p-8 shadow-sm flex-1 flex flex-col justify-between border border-white/5">
           <div>
             <span className="text-[10px] font-mono tracking-widest text-accent-blue uppercase block mb-1">
-              Scholarly Footprint
+              {t.stats.footprintTitle}
             </span>
-            <h3 className="text-xl font-display font-bold">Academic Impact</h3>
+            <h3 className="text-xl font-display font-bold">{t.stats.footprintHeading}</h3>
           </div>
 
           <div className="space-y-6 my-6">
-            {ACADEMIC_STATS.map((stat, sIdx) => (
-              <div key={sIdx} className="border-l-2 border-accent-blue/40 pl-4 py-0.5">
+            {academicStats.map((stat, sIdx) => (
+              <div 
+                key={sIdx} 
+                className={`${isRTL ? "border-r-2 pr-4" : "border-l-2 pl-4"} border-accent-blue/40 py-0.5`}
+              >
                 <span className="text-2xl font-mono font-bold text-[#F0F0F0] tracking-tight">
                   {stat.value}
                 </span>
@@ -80,8 +120,8 @@ export default function About() {
           </div>
 
           <div className="text-[11px] font-mono text-slate-400 border-t border-white/5 pt-4 flex items-center gap-1.5">
-            <Award className="w-3.5 h-3.5 text-accent-emerald" />
-            <span>Updated with latest Google Scholar metrics</span>
+            <Award className="w-3.5 h-3.5 text-accent-emerald shrink-0" />
+            <span>{t.stats.updatedMetric}</span>
           </div>
         </div>
       </div>

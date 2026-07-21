@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Mail, MapPin, Send, CheckCircle2, AlertCircle, Sparkles } from "lucide-react";
+import { Mail, MapPin, Send, CheckCircle2, AlertCircle, Sparkles, Clock } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function Contact() {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -28,7 +30,6 @@ export default function Contact() {
     }
 
     setIsSubmitting(true);
-    // Simulate API request send
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitStatus("success");
@@ -50,181 +51,181 @@ export default function Contact() {
           <div className="space-y-4">
             <div className="flex items-center gap-1.5 text-accent-blue text-xs font-mono tracking-widest uppercase">
               <Mail className="w-3.5 h-3.5" />
-              <span>Get In Touch</span>
+              <span>{t.contact.badge}</span>
             </div>
             <h3 className="text-2xl font-display font-semibold tracking-tight text-slate-100">
-              Collaboration & Inquiries
+              {t.contact.title}
             </h3>
             <p className="text-slate-400 text-sm md:text-base leading-relaxed">
-              Whether you are interested in discussing complex networks, clinical predictive models, potential paper reviews, or educational collaborations, feel free to drop a message.
+              {t.contact.subtitle}
             </p>
           </div>
 
-          {/* Core address blocks */}
-          <div className="space-y-4 py-4 border-y border-white/5">
-            <div className="flex items-start gap-3 text-sm">
-              <MapPin className="w-5 h-5 text-accent-teal shrink-0 mt-0.5" />
-              <div className="space-y-0.5 text-slate-400">
-                <span className="font-semibold text-slate-100 block">Academic Affiliation</span>
-                <span className="block text-slate-200">University of Thi Qar (UTQ)</span>
-                <span className="block text-xs">College of Computer Science and Mathematics</span>
-                <span className="block text-xs text-slate-400">Department of Information Technology</span>
-                <span className="block text-slate-500 text-xs mt-0.5">Nasiriyah, Thi Qar, Iraq</span>
+          <div className="space-y-4 border-t border-white/5 pt-6">
+            <div className="flex items-start gap-3">
+              <div className="p-2 bg-[#161618] rounded-lg border border-white/5 text-accent-blue shrink-0">
+                <Mail className="w-4 h-4" />
               </div>
-            </div>
-
-            <div className="flex items-start gap-3 text-sm">
-              <Mail className="w-5 h-5 text-accent-blue shrink-0 mt-0.5" />
-              <div className="space-y-1 text-slate-400 font-mono text-xs">
-                <span className="font-sans font-semibold text-slate-100 block text-sm">Inquiry Coordinates</span>
-                <a href="mailto:almusawiaf@vcu.edu" className="block hover:text-accent-blue hover:underline">
+              <div>
+                <span className="text-xs font-mono text-slate-500 block uppercase">{t.contact.directEmails}</span>
+                <a href="mailto:almusawiaf@vcu.edu" className="text-xs font-mono text-slate-300 hover:text-accent-blue block transition-colors">
                   almusawiaf@vcu.edu
                 </a>
-                <a href="mailto:almusawiaf@utq.edu.iq" className="block hover:text-accent-blue hover:underline">
+                <a href="mailto:almusawiaf@utq.edu.iq" className="text-xs font-mono text-slate-300 hover:text-accent-blue block transition-colors">
                   almusawiaf@utq.edu.iq
                 </a>
               </div>
             </div>
-          </div>
 
-          <p className="text-[11px] font-mono text-slate-500">
-            *Direct emails will receive priority response within 24-48 business hours.
-          </p>
-        </div>
-
-        {/* Form Column */}
-        <div className="lg:col-span-7 bg-[#161618]/50 border border-white/5 rounded-xl p-6 md:p-8">
-          {submitStatus === "success" ? (
-            <div className="h-full flex flex-col items-center justify-center text-center py-10 space-y-4 animate-fadeIn">
-              <div className="p-3 bg-emerald-500/10 text-accent-emerald rounded-full border border-accent-emerald/20">
-                <CheckCircle2 className="w-8 h-8" />
+            <div className="flex items-start gap-3">
+              <div className="p-2 bg-[#161618] rounded-lg border border-white/5 text-accent-teal shrink-0">
+                <MapPin className="w-4 h-4" />
               </div>
               <div>
-                <h4 className="text-lg font-display font-bold text-slate-100">Message Sent Successfully!</h4>
-                <p className="text-slate-400 text-sm mt-1 max-w-sm mx-auto">
-                  Thank you for your academic inquiry. Dr. Ahmad F. Al Musawi will review and respond to you as soon as possible.
+                <span className="text-xs font-mono text-slate-500 block uppercase">{t.contact.officeLocation}</span>
+                <p className="text-xs text-slate-300 leading-snug mt-0.5">
+                  {t.contact.locationDesc}
                 </p>
               </div>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <div className="p-2 bg-[#161618] rounded-lg border border-white/5 text-accent-emerald shrink-0">
+                <Clock className="w-4 h-4" />
+              </div>
+              <div>
+                <span className="text-xs font-mono text-slate-500 block uppercase">{t.contact.hours}</span>
+                <p className="text-xs text-slate-300 leading-snug mt-0.5">
+                  {t.contact.hoursDesc}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Contact Form */}
+        <div className="lg:col-span-7 bg-[#161618]/40 border border-white/5 rounded-xl p-6">
+          {submitStatus === "success" ? (
+            <div className="h-full flex flex-col items-center justify-center text-center py-8 space-y-3">
+              <div className="w-12 h-12 rounded-full bg-accent-emerald/10 text-accent-emerald border border-accent-emerald/20 flex items-center justify-center">
+                <CheckCircle2 className="w-6 h-6" />
+              </div>
+              <h4 className="text-lg font-display font-semibold text-white">
+                {t.contact.badge}
+              </h4>
+              <p className="text-xs text-slate-300 max-w-md leading-relaxed">
+                {t.contact.successMessage}
+              </p>
               <button
                 onClick={() => setSubmitStatus("idle")}
-                className="text-xs font-semibold text-accent-blue hover:underline cursor-pointer"
+                className="mt-4 px-4 py-2 bg-[#111112] border border-white/10 text-xs text-slate-300 hover:text-white rounded-lg transition-colors cursor-pointer"
               >
-                Send another message
+                Send Another Message
               </button>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
+              {submitStatus === "error" && (
+                <div className="p-3 bg-rose-500/10 border border-rose-500/20 rounded-xl text-rose-400 text-xs flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4 shrink-0" />
+                  <span>{t.contact.errorMessage}</span>
+                </div>
+              )}
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {/* Name */}
-                <div className="space-y-1">
-                  <label htmlFor="name" className="text-xs font-semibold text-slate-300 font-sans block">
-                    Full Name <span className="text-rose-500">*</span>
+                <div>
+                  <label className="block text-xs font-medium text-slate-300 mb-1.5">
+                    {t.contact.formName} *
                   </label>
                   <input
                     type="text"
-                    id="name"
                     name="name"
                     required
+                    placeholder={t.contact.formNamePlaceholder}
                     value={formData.name}
                     onChange={handleChange}
-                    placeholder="Dr. Jane Doe"
-                    className="w-full bg-[#111112] border border-white/10 focus:border-accent-blue focus:ring-1 focus:ring-accent-blue/20 rounded-lg p-2.5 text-xs text-white placeholder:text-slate-600 focus:outline-none transition-all"
+                    className="w-full bg-[#111112] border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-accent-blue/30 focus:border-accent-blue"
                   />
                 </div>
 
-                {/* Email */}
-                <div className="space-y-1">
-                  <label htmlFor="email" className="text-xs font-semibold text-slate-300 font-sans block">
-                    Email Address <span className="text-rose-500">*</span>
+                <div>
+                  <label className="block text-xs font-medium text-slate-300 mb-1.5">
+                    {t.contact.formEmail} *
                   </label>
                   <input
                     type="email"
-                    id="email"
                     name="email"
                     required
+                    placeholder={t.contact.formEmailPlaceholder}
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder="jane.doe@university.edu"
-                    className="w-full bg-[#111112] border border-white/10 focus:border-accent-blue focus:ring-1 focus:ring-accent-blue/20 rounded-lg p-2.5 text-xs text-white placeholder:text-slate-600 focus:outline-none transition-all"
+                    className="w-full bg-[#111112] border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-accent-blue/30 focus:border-accent-blue"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {/* Institution */}
-                <div className="space-y-1">
-                  <label htmlFor="institution" className="text-xs font-semibold text-slate-300 font-sans block">
-                    Affiliation / Institution
+                <div>
+                  <label className="block text-xs font-medium text-slate-300 mb-1.5">
+                    {t.contact.formInst}
                   </label>
                   <input
                     type="text"
-                    id="institution"
                     name="institution"
+                    placeholder={t.contact.formInstPlaceholder}
                     value={formData.institution}
                     onChange={handleChange}
-                    placeholder="Massachusetts Institute of Technology"
-                    className="w-full bg-[#111112] border border-white/10 focus:border-accent-blue focus:ring-1 focus:ring-accent-blue/20 rounded-lg p-2.5 text-xs text-white placeholder:text-slate-600 focus:outline-none transition-all"
+                    className="w-full bg-[#111112] border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-accent-blue/30 focus:border-accent-blue"
                   />
                 </div>
 
-                {/* Subject */}
-                <div className="space-y-1">
-                  <label htmlFor="subject" className="text-xs font-semibold text-slate-300 font-sans block">
-                    Inquiry Subject
+                <div>
+                  <label className="block text-xs font-medium text-slate-300 mb-1.5">
+                    {t.contact.formSubject}
                   </label>
                   <select
-                    id="subject"
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    className="w-full bg-[#111112] border border-white/10 focus:border-accent-blue focus:ring-1 focus:ring-accent-blue/20 rounded-lg p-2.5 text-xs text-slate-300 focus:outline-none transition-all [&>option]:bg-[#111112] [&>option]:text-white"
+                    className="w-full bg-[#111112] border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:ring-1 focus:ring-accent-blue/30 focus:border-accent-blue"
                   >
-                    <option value="research">Research Collaboration</option>
-                    <option value="review">Journal / Conference Peer Review</option>
-                    <option value="speaking">Speaking Engagement</option>
-                    <option value="student">Graduate Student Inquiry</option>
-                    <option value="other">General Inquiry</option>
+                    <option value="research">{t.contact.formSubjectResearch}</option>
+                    <option value="collab">{t.contact.formSubjectCollab}</option>
+                    <option value="teaching">{t.contact.formSubjectTeaching}</option>
+                    <option value="other">{t.contact.formSubjectOther}</option>
                   </select>
                 </div>
               </div>
 
-              {/* Message */}
-              <div className="space-y-1">
-                <label htmlFor="message" className="text-xs font-semibold text-slate-300 font-sans block">
-                  Inquiry Message <span className="text-rose-500">*</span>
+              <div>
+                <label className="block text-xs font-medium text-slate-300 mb-1.5">
+                  {t.contact.formMessage} *
                 </label>
                 <textarea
-                  id="message"
                   name="message"
                   required
                   rows={4}
+                  placeholder={t.contact.formMessagePlaceholder}
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="Describe your collaboration proposal, review request, or speaking guidelines..."
-                  className="w-full bg-[#111112] border border-white/10 focus:border-accent-blue focus:ring-1 focus:ring-accent-blue/20 rounded-lg p-2.5 text-xs text-white placeholder:text-slate-600 focus:outline-none transition-all resize-none"
-                />
+                  className="w-full bg-[#111112] border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-accent-blue/30 focus:border-accent-blue resize-none"
+                ></textarea>
               </div>
 
-              {/* Status Indicator */}
-              {submitStatus === "error" && (
-                <div className="flex items-center gap-2 bg-rose-500/10 text-rose-400 text-xs px-3 py-2.5 rounded-lg border border-rose-500/20 font-sans">
-                  <AlertCircle className="w-4 h-4 text-rose-500 shrink-0" />
-                  <span>Please fill out all required fields marked with an asterisk (*).</span>
-                </div>
-              )}
-
-              {/* Submit button */}
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full inline-flex items-center justify-center gap-2 bg-accent-blue hover:bg-accent-blue/90 text-slate-950 font-bold text-xs py-3 rounded-lg transition-all shadow-sm cursor-pointer disabled:opacity-50"
+                className="w-full bg-accent-blue hover:bg-accent-blue/90 text-slate-950 font-bold py-2.5 px-4 rounded-xl text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm disabled:opacity-50"
               >
                 {isSubmitting ? (
-                  <span>Sending inquiry...</span>
+                  <>
+                    <Sparkles className="w-4 h-4 animate-spin" />
+                    <span>{t.contact.sendingBtn}</span>
+                  </>
                 ) : (
                   <>
-                    <span>Transmit Secure Inquiry</span>
-                    <Send className="w-3.5 h-3.5" />
+                    <Send className="w-4 h-4" />
+                    <span>{t.contact.sendBtn}</span>
                   </>
                 )}
               </button>

@@ -6,24 +6,23 @@ import Publications from "./components/Publications";
 import Timeline from "./components/Timeline";
 import Contact from "./components/Contact";
 import { ResearchCategory } from "./types";
-import { Network, GraduationCap, Quote, Mail, ChevronUp, BookOpen, User, ArrowUpRight } from "lucide-react";
+import { ChevronUp, ArrowUpRight, Globe, Languages } from "lucide-react";
+import { LanguageProvider, useLanguage } from "./context/LanguageContext";
 
-export default function App() {
+function MainAppContent() {
+  const { t, language, toggleLanguage, setLanguage, isRTL } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState<ResearchCategory | null>(null);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [activeSection, setActiveSection] = useState("about");
 
-  // Scroll spy to highlight active nav link and toggle back-to-top button
   useEffect(() => {
     const handleScroll = () => {
-      // Back to top visibility
       if (window.scrollY > 400) {
         setShowBackToTop(true);
       } else {
         setShowBackToTop(false);
       }
 
-      // Scroll spy logic
       const sections = ["bio", "research-map", "publications", "cv", "contact"];
       const scrollPosition = window.scrollY + 160;
 
@@ -47,7 +46,7 @@ export default function App() {
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
-      const offset = 100; // Offset for sticky navbar
+      const offset = 100;
       const bodyRect = document.body.getBoundingClientRect().top;
       const elementRect = el.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
@@ -62,7 +61,6 @@ export default function App() {
 
   const handleSelectCategory = (category: ResearchCategory | null) => {
     setSelectedCategory(category);
-    // If a category was chosen, auto-scroll to the publications section so the user sees the filtered results
     if (category) {
       setTimeout(() => {
         scrollToSection("publications");
@@ -75,28 +73,28 @@ export default function App() {
       
       {/* Sticky Top Navigation */}
       <nav id="top-nav" className="sticky top-0 bg-[#0A0A0B]/85 backdrop-blur-md border-b border-white/5 z-50 transition-all duration-200 shadow-sm">
-        <div className="max-w-6xl mx-auto px-4 md:px-8 py-3.5 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-4 md:px-8 py-3.5 flex items-center justify-between gap-4">
           
           {/* Logo / Identity */}
           <div 
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="flex items-center gap-2.5 cursor-pointer group"
+            className="flex items-center gap-2.5 cursor-pointer group shrink-0"
           >
             <div className="w-8 h-8 rounded-lg bg-[#161618] border border-white/10 flex items-center justify-center text-accent-blue font-mono font-bold text-sm group-hover:bg-accent-blue group-hover:text-slate-950 transition-all duration-200">
               AM
             </div>
             <div className="leading-tight">
               <span className="font-display font-bold text-white text-sm tracking-tight block">
-                Ahmad F. Al Musawi
+                {t.hero.name.split(",")[0]}
               </span>
               <span className="text-[10px] text-slate-500 font-mono block">
-                Computer Science Ph.D.
+                {t.nav.brandRole}
               </span>
             </div>
           </div>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden md:flex items-center gap-2 text-xs font-semibold text-slate-400">
+          <div className="hidden lg:flex items-center gap-2 text-xs font-semibold text-slate-400">
             <button
               onClick={() => scrollToSection("bio")}
               className={`px-3 py-1.5 rounded-lg border transition-all cursor-pointer ${
@@ -105,7 +103,7 @@ export default function App() {
                   : "border-transparent text-slate-400 hover:text-white hover:bg-white/5"
               }`}
             >
-              Biography
+              {t.nav.bio}
             </button>
             <button
               onClick={() => scrollToSection("research-map")}
@@ -115,7 +113,7 @@ export default function App() {
                   : "border-transparent text-slate-400 hover:text-white hover:bg-white/5"
               }`}
             >
-              Research Map
+              {t.nav.researchMap}
             </button>
             <button
               onClick={() => scrollToSection("publications")}
@@ -125,7 +123,7 @@ export default function App() {
                   : "border-transparent text-slate-400 hover:text-white hover:bg-white/5"
               }`}
             >
-              Publications
+              {t.nav.publications}
             </button>
             <button
               onClick={() => scrollToSection("cv")}
@@ -135,48 +133,62 @@ export default function App() {
                   : "border-transparent text-slate-400 hover:text-white hover:bg-white/5"
               }`}
             >
-              Academic Timeline
-            </button>
-            
-            <span className="h-4 w-px bg-white/10 mx-2"></span>
-
-            <button
-              onClick={() => scrollToSection("contact")}
-              className="inline-flex items-center gap-1 bg-[#161618] border border-white/10 text-slate-200 hover:text-white hover:bg-white/5 px-4 py-2 rounded-lg transition-all duration-200 shadow-sm cursor-pointer"
-            >
-              <span>Contact</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
+              {t.nav.timeline}
             </button>
           </div>
 
-          {/* Mobile contact button */}
-          <button
-            onClick={() => scrollToSection("contact")}
-            className="md:hidden inline-flex items-center justify-center px-3 py-2 bg-[#161618] border border-white/10 text-slate-200 hover:text-white rounded-lg text-xs font-semibold cursor-pointer"
-          >
-            Contact
-          </button>
+          {/* Right Top Bar Controls: Language Switch Key + Contact Button */}
+          <div className="flex items-center gap-2.5">
+            {/* Arabic / English Switch Key */}
+            <div className="inline-flex items-center p-1 bg-[#161618] border border-white/10 rounded-xl shadow-inner">
+              <button
+                onClick={() => setLanguage("en")}
+                className={`px-2.5 py-1 text-xs font-semibold rounded-lg transition-all cursor-pointer ${
+                  language === "en"
+                    ? "bg-accent-blue text-slate-950 font-bold shadow-sm"
+                    : "text-slate-400 hover:text-white"
+                }`}
+                title="Switch to English"
+              >
+                EN
+              </button>
+              <button
+                onClick={() => setLanguage("ar")}
+                className={`px-2.5 py-1 text-xs font-semibold rounded-lg transition-all cursor-pointer ${
+                  language === "ar"
+                    ? "bg-accent-blue text-slate-950 font-bold shadow-sm"
+                    : "text-slate-400 hover:text-white"
+                }`}
+                title="التحويل للغة العربية"
+              >
+                العربية
+              </button>
+            </div>
+
+            <button
+              onClick={() => scrollToSection("contact")}
+              className="hidden sm:inline-flex items-center gap-1 bg-[#161618] border border-white/10 text-slate-200 hover:text-white hover:bg-white/5 px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all duration-200 shadow-sm cursor-pointer"
+            >
+              <span>{t.nav.contact}</span>
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
         </div>
       </nav>
 
       {/* Main Content Area */}
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 md:px-8 py-8">
-        
         {/* Academic Hero Identity Card */}
         <Hero />
 
         {/* Biography Section */}
-        <div id="bio" className="scroll-mt-24">
-          <About />
-        </div>
+        <About />
 
         {/* Custom Ontological Map */}
-        <div id="research-map" className="scroll-mt-24 mb-8">
-          <ResearchMap
-            selectedCategory={selectedCategory}
-            onSelectCategory={handleSelectCategory}
-          />
-        </div>
+        <ResearchMap
+          selectedCategory={selectedCategory}
+          onSelectCategory={handleSelectCategory}
+        />
 
         {/* Dynamic Publications Database */}
         <Publications
@@ -189,7 +201,6 @@ export default function App() {
 
         {/* Dynamic Contact Coordinator */}
         <Contact />
-
       </main>
 
       {/* Scholarly Footer */}
@@ -197,14 +208,13 @@ export default function App() {
         <div className="max-w-6xl mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-center md:text-left space-y-1">
             <h4 className="font-display font-bold text-white text-sm">
-              Ahmad F. Al Musawi, Ph.D.
+              {t.hero.name}
             </h4>
             <p className="text-xs text-slate-500">
-              © 2026 Ahmad F. Al Musawi. Crafted for clarity, academic excellence, and responsive performance.
+              © 2026 {t.hero.name.split(",")[0]}. Crafted for academic distinction, responsive research dissemination, and bilingual accessibility.
             </p>
           </div>
 
-          {/* Footer Social / Profile links */}
           <div className="flex items-center gap-4 text-xs font-semibold text-slate-500">
             <a
               href="https://scholar.google.com/citations?user=QJYj-n4AAAAJ"
@@ -240,13 +250,20 @@ export default function App() {
       {showBackToTop && (
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="fixed bottom-6 right-6 p-3 bg-[#161618] hover:bg-[#232326] border border-white/10 text-slate-300 hover:text-white rounded-full shadow-lg transition-all duration-200 z-40 cursor-pointer animate-fadeIn"
+          className={`fixed bottom-6 ${isRTL ? "left-6" : "right-6"} p-3 bg-[#161618] hover:bg-[#232326] border border-white/10 text-slate-300 hover:text-white rounded-full shadow-lg transition-all duration-200 z-40 cursor-pointer animate-fadeIn`}
           title="Back to Top"
         >
           <ChevronUp className="w-5 h-5" />
         </button>
       )}
-
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <LanguageProvider>
+      <MainAppContent />
+    </LanguageProvider>
   );
 }
