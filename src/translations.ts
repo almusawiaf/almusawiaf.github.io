@@ -2,7 +2,9 @@ export type Language = "en" | "ar";
 
 export interface TranslationStructure {
   nav: {
+    home: string;
     bio: string;
+    courses: string;
     researchMap: string;
     publications: string;
     timeline: string;
@@ -158,6 +160,30 @@ export interface TranslationStructure {
     successMessage: string;
     errorMessage: string;
   };
+  courses: {
+    badge: string;
+    title: string;
+    subtitle: string;
+    searchPlaceholder: string;
+    levelLabel: string;
+    departmentLabel: string;
+    lecturesCount: string;
+    watchLecture: string;
+    topicsLabel: string;
+    playlistBtn: string;
+    noResults: string;
+    expandAgenda: string;
+    collapseAgenda: string;
+    timestampsBadge: string;
+    playInApp: string;
+    closePlayer: string;
+    nowPlaying: string;
+    jumpToTimestamp: string;
+    openInYoutube: string;
+    backToPortfolio: string;
+    dedicatedHeaderTitle: string;
+    dedicatedHeaderSubtitle: string;
+  };
   categories: {
     networkScience: string;
     healthInformatics: string;
@@ -170,7 +196,9 @@ export interface TranslationStructure {
 export const translations: Record<Language, TranslationStructure> = {
   en: {
     nav: {
+      home: "Home",
       bio: "Biography",
+      courses: "Teaching & Courses",
       researchMap: "Research Map",
       publications: "Publications",
       timeline: "Academic Timeline",
@@ -326,6 +354,30 @@ export const translations: Record<Language, TranslationStructure> = {
       successMessage: "Thank you for reaching out! Your message has been prepared and logged. Dr. Al Musawi will reply shortly.",
       errorMessage: "Please fill out all required fields (Name, Email, Message) before sending.",
     },
+    courses: {
+      badge: "Academic Pedagogy & Course Syllabus",
+      title: "Teaching & Academic Courses",
+      subtitle: "Explore undergraduate and graduate course modules, lecture agendas, timestamps, and video lectures taught by Dr. Ahmad Fadhil Al Musawi in the Department of Information Technology.",
+      searchPlaceholder: "Search lecture topics, algorithms, or keywords (e.g. OLAP, Regression, Data Mining, KNN, ETL)...",
+      levelLabel: "Academic Level",
+      departmentLabel: "Department & Institution",
+      lecturesCount: "Lectures Recorded",
+      watchLecture: "Watch In-App Video",
+      topicsLabel: "Lecture Syllabus & Agenda Breakdown",
+      playlistBtn: "Visit Official YouTube Channel",
+      noResults: "No lecture modules matched your search query.",
+      expandAgenda: "Show Detailed Timestamps & Topics",
+      collapseAgenda: "Hide Details",
+      timestampsBadge: "Interactive Timestamps",
+      playInApp: "Play Lecture Video",
+      closePlayer: "Close Video Player",
+      nowPlaying: "Now Playing In-App",
+      jumpToTimestamp: "Jump to Timestamp",
+      openInYoutube: "Open in YouTube",
+      backToPortfolio: "Back to Portfolio Main",
+      dedicatedHeaderTitle: "My Teaching Materials & Lecture Portal",
+      dedicatedHeaderSubtitle: "Dedicated academic portal hosting course lectures, video playback with interactive timestamps, and comprehensive syllabus breakdown for Dr. Ahmad Fadhil Al Musawi's courses.",
+    },
     categories: {
       networkScience: "Network Science & Graph Theory",
       healthInformatics: "Healthcare Informatics & Clinical ML",
@@ -336,7 +388,9 @@ export const translations: Record<Language, TranslationStructure> = {
   },
   ar: {
     nav: {
+      home: "الرئيسية",
       bio: "السيرة الذاتية",
+      courses: "المواد الدراسية (My Teaching Materials)",
       researchMap: "خريطة البحوث",
       publications: "المنشورات العلمية",
       timeline: "المسيرة الأكاديمية",
@@ -491,6 +545,30 @@ export const translations: Record<Language, TranslationStructure> = {
       sendingBtn: "جاري الإرسال...",
       successMessage: "شكراً لتواصلك! تم تجهيز رسالتك بنجاح. سيقوم د. أحمد فاضل الموسوي بالرد في أقرب وقت ممكن.",
       errorMessage: "يرجى تعبئة كافة الحقول المطلوبة (الاسم، البريد، والرسالة) قبل الإرسال.",
+    },
+    courses: {
+      badge: "التدريس الأكاديمي والمناهج الجامعية",
+      title: "الكورسات الدراسية والمناهج التعليمية",
+      subtitle: "تصفح مفردات وتفاصيل الكورسات الدراسية، المحاضرات المسجلة، الفهرس الزمني للمواضيع، والمحاور التعليمية للدروس التي قمت بتدريسها لطلاب المرحلة الرابعة في قسم تكنولوجيا المعلومات.",
+      searchPlaceholder: "ابحث في مواضيع المحاضرات أو الخوارزميات (مثال: OLAP، الانحدار، التنقيب عن البيانات، KNN، ETL)...",
+      levelLabel: "المرحلة الدراسية",
+      departmentLabel: "القسم والجامعة",
+      lecturesCount: "المحاضرات المتاحة",
+      watchLecture: "مشاهدة الفيديو في الصفحة",
+      topicsLabel: "مفردات ومحاور المحاضرة",
+      playlistBtn: "قناة المحاضرات على اليوتيوب",
+      noResults: "لم يتم العثور على محاضرات تطابق البحث.",
+      expandAgenda: "عرض الأوقات والمحاور التفصيلية",
+      collapseAgenda: "إخفاء التفاصيل",
+      timestampsBadge: "فهرس زمني تفصيلي",
+      playInApp: "تشغيل المحاضرة في التطبيق",
+      closePlayer: "إغلاق المشغل",
+      nowPlaying: "مشغل المحاضرات التفاعلي",
+      jumpToTimestamp: "الانتقال إلى التوقيت",
+      openInYoutube: "فتح في موقع يوتيوب",
+      backToPortfolio: "العودة للصفحة الرئيسية للملف الشخصي",
+      dedicatedHeaderTitle: "المواد الدراسية والمحاضرات المرئية (My Teaching Materials)",
+      dedicatedHeaderSubtitle: "البوابة التعليمية الأكاديمية الشاملة لعرض محاضرات وتفاصيل المواد الدراسية التي يدرسها الدكتور أحمد فاضل الموسوي، مع إمكانية التشغيل الفوري المباشر مع الفهرسة الزمنية للمواضيع.",
     },
     categories: {
       networkScience: "علم الشبكات ونظرية الرسوم البيانية",
