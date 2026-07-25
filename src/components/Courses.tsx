@@ -47,6 +47,25 @@ export default function Courses({ isStandalonePage = false, onBackToHome }: Cour
 
   const playerRef = useRef<HTMLDivElement>(null);
 
+  const handleSelectCourse = (courseId: string) => {
+    setSelectedCourseId(courseId);
+    setSearchQuery("");
+    const targetCourse = COURSES_DATA.find((c) => c.id === courseId);
+    if (targetCourse && targetCourse.lectures.length > 0) {
+      setActiveVideo({
+        lecture: targetCourse.lectures[0],
+        startSeconds: 0,
+      });
+      const initialExpanded: Record<string, boolean> = {};
+      targetCourse.lectures.slice(0, 3).forEach((lec) => {
+        initialExpanded[lec.id] = true;
+      });
+      setExpandedLectureIds(initialExpanded);
+    } else {
+      setActiveVideo(null);
+    }
+  };
+
   const activeCourse = useMemo(() => {
     return COURSES_DATA.find((c) => c.id === selectedCourseId) || COURSES_DATA[0];
   }, [selectedCourseId]);
@@ -300,6 +319,38 @@ export default function Courses({ isStandalonePage = false, onBackToHome }: Cour
               <ExternalLink className="w-3 h-3 opacity-70" />
             </a>
           )}
+        </div>
+
+        {/* Course Switcher Tabs */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 mb-6">
+          {COURSES_DATA.map((course) => {
+            const isSelected = course.id === selectedCourseId;
+            return (
+              <button
+                key={course.id}
+                onClick={() => handleSelectCourse(course.id)}
+                className={`p-3.5 rounded-xl border text-left text-right transition-all cursor-pointer flex flex-col justify-between gap-2 ${
+                  isSelected
+                    ? "bg-accent-blue/15 border-accent-blue text-white shadow-md ring-1 ring-accent-blue/40"
+                    : "bg-[#161618] hover:bg-white/5 border-white/10 text-slate-400 hover:text-slate-200"
+                }`}
+              >
+                <div className="flex items-center justify-between w-full">
+                  <span className={`px-2 py-0.5 font-mono text-[11px] font-bold rounded ${
+                    isSelected ? "bg-accent-blue text-slate-950" : "bg-white/10 text-slate-300"
+                  }`}>
+                    {course.code}
+                  </span>
+                  <span className="text-[10px] font-mono text-slate-400 bg-black/40 px-2 py-0.5 rounded border border-white/5">
+                    {course.lectures.length} {language === "ar" ? "محاضرة" : "Lecs"}
+                  </span>
+                </div>
+                <p className="text-xs font-semibold leading-snug line-clamp-2">
+                  {language === "ar" ? course.titleAr : course.titleEn}
+                </p>
+              </button>
+            );
+          })}
         </div>
 
         {/* Main Course Details Banner */}

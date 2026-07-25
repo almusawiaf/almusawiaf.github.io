@@ -300,8 +300,8 @@ function MainAppContent() {
                 </h3>
                 <p className="text-xs text-slate-400 max-w-2xl">
                   {language === "ar"
-                    ? "صفحة مخصصة كلياً لمادة ذكاء الأعمال (Business Intelligence) تحتوي على الفيديوهات المدمجة والجدول الزمني التفاعلي للمواضيع مع إمكانية التشغيل في التطبيق مباشرةً."
-                    : "Browse complete Business Intelligence syllabus modules with in-app video playback and clickable topic timestamps."}
+                    ? "بوابة تعليمية شاملة للمواد الدراسية: ذكاء الأعمال، تحليل وتصميم الأنظمة، رسومات الحاسوب، والجانب العملي في بيسك المرئي 6.0، تحتوي على جميع المحاضرات والدروس المرئية المدمجة مع الأجندات التفاعلية."
+                    : "Browse complete course syllabus modules for Business Intelligence, System Analysis & Design, Computer Graphics, and Practical Graphics in VB 6.0 with in-app video playback."}
                 </p>
               </div>
 
