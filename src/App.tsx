@@ -7,11 +7,13 @@ import Publications from "./components/Publications";
 import Timeline from "./components/Timeline";
 import Contact from "./components/Contact";
 import { ResearchCategory } from "./types";
-import { ChevronUp, ArrowUpRight, GraduationCap, Home } from "lucide-react";
+import { ChevronUp, ArrowUpRight, GraduationCap, Home, Sun, Moon, Sparkles } from "lucide-react";
 import { LanguageProvider, useLanguage } from "./context/LanguageContext";
+import { ThemeProvider, useTheme } from "./context/ThemeContext";
 
 function MainAppContent() {
   const { t, language, setLanguage, isRTL } = useLanguage();
+  const { themeMode, setThemeMode, effectiveTheme } = useTheme();
   const [currentView, setCurrentView] = useState<"portfolio" | "courses">("portfolio");
   const [selectedCategory, setSelectedCategory] = useState<ResearchCategory | null>(null);
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -191,8 +193,55 @@ function MainAppContent() {
             </button>
           </div>
 
-          {/* Right Top Bar Controls: Language Switch Key + Contact Button */}
-          <div className="flex items-center gap-2.5">
+          {/* Right Top Bar Controls: Day/Night Mode Switch + Language Switch Key + Contact Button */}
+          <div className="flex items-center gap-2 md:gap-2.5">
+            
+            {/* Dynamic System / Day Light / Night Mode Switcher */}
+            <div className="inline-flex items-center p-1 bg-[#161618] border border-white/10 rounded-xl shadow-inner">
+              <button
+                onClick={() => setThemeMode("auto")}
+                className={`p-1.5 px-2 text-xs font-semibold rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${
+                  themeMode === "auto"
+                    ? "bg-emerald-500 text-slate-950 font-bold shadow-sm"
+                    : "text-slate-400 hover:text-white"
+                }`}
+                title={
+                  language === "ar"
+                    ? "الوضع الديناميكي والتلقائي (Dynamic Auto Mode)"
+                    : "Switch to Dynamic / Auto System Mode"
+                }
+              >
+                <Sparkles className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline text-[11px] font-medium">
+                  {language === "ar" ? "تلقائي" : "Auto"}
+                </span>
+              </button>
+              <button
+                onClick={() => setThemeMode("light")}
+                className={`p-1.5 px-2 text-xs font-semibold rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${
+                  themeMode === "light"
+                    ? "bg-amber-400 text-slate-950 font-bold shadow-sm"
+                    : "text-slate-400 hover:text-white"
+                }`}
+                title={language === "ar" ? "الوضع النهاري (Day Light Mode)" : "Switch to Day Light Mode"}
+              >
+                <Sun className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline text-[11px] font-medium">{language === "ar" ? "نهاري" : "Day"}</span>
+              </button>
+              <button
+                onClick={() => setThemeMode("dark")}
+                className={`p-1.5 px-2 text-xs font-semibold rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${
+                  themeMode === "dark"
+                    ? "bg-accent-blue text-slate-950 font-bold shadow-sm"
+                    : "text-slate-400 hover:text-white"
+                }`}
+                title={language === "ar" ? "الوضع الليلي (Night Mode)" : "Switch to Night Mode"}
+              >
+                <Moon className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline text-[11px] font-medium">{language === "ar" ? "ليلي" : "Night"}</span>
+              </button>
+            </div>
+
             {/* Arabic / English Switch Key */}
             <div className="inline-flex items-center p-1 bg-[#161618] border border-white/10 rounded-xl shadow-inner">
               <button
@@ -400,8 +449,10 @@ function MainAppContent() {
 
 export default function App() {
   return (
-    <LanguageProvider>
-      <MainAppContent />
-    </LanguageProvider>
+    <ThemeProvider>
+      <LanguageProvider>
+        <MainAppContent />
+      </LanguageProvider>
+    </ThemeProvider>
   );
 }

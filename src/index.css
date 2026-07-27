@@ -22,12 +22,15 @@
 html {
   scroll-behavior: smooth;
   background-color: #0A0A0B;
+  color: #f0f0f0;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 body {
   font-family: var(--font-sans);
   color: #f0f0f0;
   background-color: #0A0A0B;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 /* Custom scrollbar */
@@ -44,4 +47,99 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #323236;
 }
+
+/* ==========================================================================
+   DAY LIGHT MODE OVERRIDES (.light)
+   ========================================================================== */
+html.light {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+html.light body {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+/* Scrollbar Light Mode */
+html.light ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+html.light ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+}
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Top Nav Light Mode */
+html.light #top-nav {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+  border-bottom-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Background Containers Light Mode */
+html.light .bg-\[\#0A0A0B\],
+html.light .bg-\[\#0a0a0b\],
+html.light .bg-[#0A0A0B]/90,
+html.light .bg-slate-950 {
+  background-color: #f8fafc !important;
+}
+
+html.light .bg-\[\#111112\],
+html.light .bg-\[\#111112\]\/60,
+html.light .bg-\[\#111112\]\/80,
+html.light .bg-\[\#0d0d0e\] {
+  background-color: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03) !important;
+}
+
+html.light .bg-\[\#161618\],
+html.light .bg-\[\#161618\]\/60,
+html.light .bg-\[\#1f1f22\] {
+  background-color: #f1f5f9 !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Typography Light Mode */
+html.light .text-white {
+  color: #0f172a !important;
+}
+html.light .text-slate-100 {
+  color: #0f172a !important;
+}
+html.light .text-slate-200 {
+  color: #1e293b !important;
+}
+html.light .text-slate-300 {
+  color: #334155 !important;
+}
+html.light .text-slate-400 {
+  color: #475569 !important;
+}
+html.light .text-slate-500 {
+  color: #64748b !important;
+}
+
+/* Accent Text Color in Light Mode for WCAG AA Contrast */
+html.light .text-accent-blue {
+  color: #9A741E !important;
+}
+
+/* Light Mode Borders */
+html.light .border-white\/5,
+html.light .border-white\/10,
+html.light .border-white\/20,
+html.light .border-white\/30 {
+  border-color: rgba(0, 0, 0, 0.09) !important;
+}
+
+/* Buttons with accent-blue background should keep dark text */
+html.light .bg-accent-blue.text-slate-950,
+html.light .bg-accent-blue .text-slate-950 {
+  color: #0f172a !important;
+}
+
 
