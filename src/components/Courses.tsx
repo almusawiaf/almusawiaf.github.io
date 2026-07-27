@@ -322,58 +322,70 @@ export default function Courses({ isStandalonePage = false, onBackToHome }: Cour
         </div>
 
         {/* Course Switcher Tabs */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-3 mb-6">
           {COURSES_DATA.map((course) => {
             const isSelected = course.id === selectedCourseId;
             return (
               <button
                 key={course.id}
                 onClick={() => handleSelectCourse(course.id)}
-                className={`p-3.5 rounded-xl border text-left text-right transition-all cursor-pointer flex flex-col justify-between gap-2 ${
+                className={`p-4 rounded-xl border text-left text-right transition-all cursor-pointer flex flex-col justify-between gap-2.5 group ${
                   isSelected
-                    ? "bg-accent-blue/15 border-accent-blue text-white shadow-md ring-1 ring-accent-blue/40"
-                    : "bg-[#161618] hover:bg-white/5 border-white/10 text-slate-400 hover:text-slate-200"
+                    ? "bg-accent-blue/20 border-accent-blue text-white shadow-lg shadow-accent-blue/10 ring-2 ring-accent-blue/50"
+                    : "bg-[#161618] hover:bg-[#1f1f22] border-white/10 hover:border-accent-blue/40 text-slate-300 hover:text-white"
                 }`}
               >
                 <div className="flex items-center justify-between w-full">
-                  <span className={`px-2 py-0.5 font-mono text-[11px] font-bold rounded ${
-                    isSelected ? "bg-accent-blue text-slate-950" : "bg-white/10 text-slate-300"
+                  <span className={`px-2.5 py-0.5 font-mono text-xs font-extrabold rounded ${
+                    isSelected ? "bg-accent-blue text-slate-950" : "bg-white/10 text-slate-200 group-hover:bg-accent-blue/20 group-hover:text-accent-blue"
                   }`}>
                     {course.code}
                   </span>
-                  <span className="text-[10px] font-mono text-slate-400 bg-black/40 px-2 py-0.5 rounded border border-white/5">
+                  <span className="text-[11px] font-mono text-slate-300 bg-black/50 px-2 py-0.5 rounded border border-white/10">
                     {course.lectures.length} {language === "ar" ? "محاضرة" : "Lecs"}
                   </span>
                 </div>
-                <p className="text-xs font-semibold leading-snug line-clamp-2">
-                  {language === "ar" ? course.titleAr : course.titleEn}
-                </p>
+                <div>
+                  <h3 className={`text-sm md:text-base font-bold leading-snug font-display ${
+                    isSelected ? "text-white" : "text-slate-100 group-hover:text-accent-blue"
+                  }`}>
+                    {language === "ar" ? course.titleAr : course.titleEn}
+                  </h3>
+                  <p className="text-[11px] font-mono text-slate-400 mt-1 line-clamp-1 opacity-80">
+                    {language === "ar" ? course.titleEn : course.titleAr}
+                  </p>
+                </div>
               </button>
             );
           })}
         </div>
 
         {/* Main Course Details Banner */}
-        <div className="bg-[#161618]/60 border border-white/5 rounded-xl p-5 md:p-6 mb-6 relative overflow-hidden">
+        <div className="bg-[#161618] border-2 border-accent-blue/30 rounded-xl p-5 md:p-7 mb-6 relative overflow-hidden shadow-xl">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-            <div className="space-y-2 max-w-3xl">
+            <div className="space-y-3 max-w-3xl">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="px-2.5 py-0.5 bg-accent-blue/15 text-accent-blue font-mono font-bold text-xs rounded-md border border-accent-blue/20">
+                <span className="px-3 py-1 bg-accent-blue/20 text-accent-blue font-mono font-extrabold text-xs rounded-md border border-accent-blue/30 shadow-sm">
                   {activeCourse.code}
                 </span>
-                <span className="px-2.5 py-0.5 bg-white/5 text-slate-300 font-sans text-xs rounded-md border border-white/10">
+                <span className="px-2.5 py-1 bg-white/10 text-slate-200 font-sans text-xs font-semibold rounded-md border border-white/10">
                   {language === "ar" ? activeCourse.levelAr : activeCourse.levelEn}
                 </span>
-                <span className="px-2.5 py-0.5 bg-white/5 text-slate-400 font-sans text-xs rounded-md border border-white/10">
+                <span className="px-2.5 py-1 bg-white/5 text-slate-300 font-sans text-xs rounded-md border border-white/10">
                   {language === "ar" ? activeCourse.departmentAr : activeCourse.departmentEn} - {language === "ar" ? activeCourse.institutionAr : activeCourse.institutionEn}
                 </span>
               </div>
 
-              <h3 className="text-xl md:text-2xl font-display font-bold text-slate-100">
-                {language === "ar" ? activeCourse.titleAr : activeCourse.titleEn}
-              </h3>
+              <div>
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-extrabold text-white tracking-tight leading-tight">
+                  {language === "ar" ? activeCourse.titleAr : activeCourse.titleEn}
+                </h2>
+                <p className="text-xs md:text-sm font-mono text-accent-blue/90 mt-1 font-semibold">
+                  {language === "ar" ? activeCourse.titleEn : activeCourse.titleAr}
+                </p>
+              </div>
 
-              <p className="text-xs md:text-sm text-slate-300 leading-relaxed font-sans pt-1">
+              <p className="text-xs md:text-sm text-slate-300 leading-relaxed font-sans pt-1 border-t border-white/10 mt-2">
                 {language === "ar" ? activeCourse.descriptionAr : activeCourse.descriptionEn}
               </p>
             </div>
