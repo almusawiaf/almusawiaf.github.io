@@ -37,15 +37,11 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
       let resolvedTheme: EffectiveTheme = "dark";
 
       if (themeMode === "auto") {
-        if (typeof window !== "undefined" && window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches) {
-          resolvedTheme = "light";
-        } else if (typeof window !== "undefined" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-          resolvedTheme = "dark";
-        } else {
-          // Dynamic time fallback: Day hours (6am - 6pm) -> light, Night hours -> dark
-          const hour = new Date().getHours();
-          resolvedTheme = hour >= 6 && hour < 18 ? "light" : "dark";
-        }
+        // Dynamic time-based automatic mode:
+        // Daytime (6:00 AM to 6:00 PM / 18:00) -> Light Mode
+        // Nighttime (6:00 PM to 6:00 AM) -> Night Mode
+        const currentHour = new Date().getHours();
+        resolvedTheme = currentHour >= 6 && currentHour < 18 ? "light" : "dark";
       } else {
         resolvedTheme = themeMode;
       }
@@ -64,17 +60,13 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 
     updateTheme();
 
-    if (themeMode === "auto" && typeof window !== "undefined" && window.matchMedia) {
-      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-      const handleChange = () => updateTheme();
+    if (themeMode === "auto") {
+      // Check local time every 30 seconds to automatically adjust day/night theme
+      const intervalId = setInterval(() => {
+        updateTheme();
+      }, 30000);
 
-      if (mediaQuery.addEventListener) {
-        mediaQuery.addEventListener("change", handleChange);
-        return () => mediaQuery.removeEventListener("change", handleChange);
-      } else {
-        mediaQuery.addListener(handleChange);
-        return () => mediaQuery.removeListener(handleChange);
-      }
+      return () => clearInterval(intervalId);
     }
   }, [themeMode]);
 
