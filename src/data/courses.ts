@@ -1175,6 +1175,8 @@ export const COURSES_DATA: Course[] = [
         division: "practical",
         titleEn: "Practical Session 1: Python Basics Workshop",
         titleAr: "الجلسة العملية 1: ورشة أساسيات بايثون",
+        url: "https://youtu.be/1GYPfBoY8ds",
+        youtubeId: "1GYPfBoY8ds",
         pageUrl: "/materials/ai-intro/practical-lec1.html",
         topics: [
           { topicEn: "Installing Python and Anaconda Environment", topicAr: "تنصيب بايثون وبيئة أناكوندا" },
