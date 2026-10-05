@@ -19,7 +19,10 @@ import {
   ArrowRight,
   Maximize2,
   Tv,
-  ListVideo
+  ListVideo,
+  BookMarked,
+  Code2,
+  Globe,
 } from "lucide-react";
 
 interface CoursesProps {
@@ -447,14 +450,33 @@ export default function Courses({ isStandalonePage = false, onBackToHome }: Cour
           </div>
         ) : (
           <div className="space-y-4">
-            {filteredLectures.map((lec) => {
+            {(() => {
+              let lastDivision: string | undefined = undefined;
+              return filteredLectures.map((lec) => {
               const isExpanded = !!expandedLectureIds[lec.id];
               const hasTimestamps = lec.topics.some((t) => t.time);
               const isCurrentlyPlaying = activeVideo?.lecture.id === lec.id;
+              const showDivisionHeader = lec.division && lec.division !== lastDivision;
+              if (lec.division) lastDivision = lec.division;
 
               return (
+                <React.Fragment key={lec.id}>
+                  {showDivisionHeader && (
+                    <div className={`flex items-center gap-3 pt-2 pb-1 ${lec.division === "practical" ? "mt-4" : ""}`}>
+                      <div className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border text-xs font-mono font-bold ${
+                        lec.division === "theoretical"
+                          ? "bg-accent-blue/10 border-accent-blue/30 text-accent-blue"
+                          : "bg-emerald-950/40 border-emerald-500/30 text-emerald-400"
+                      }`}>
+                        {lec.division === "theoretical"
+                          ? <><BookMarked className="w-3.5 h-3.5" /><span>{language === "ar" ? "الجزء النظري — Theoretical" : "Theoretical"}</span></>
+                          : <><Code2 className="w-3.5 h-3.5" /><span>{language === "ar" ? "الجزء العملي — Practical" : "Practical"}</span></>
+                        }
+                      </div>
+                      <div className="flex-1 h-px bg-white/5" />
+                    </div>
+                  )}
                 <div
-                  key={lec.id}
                   className={`border rounded-xl transition-all duration-200 overflow-hidden ${
                     isCurrentlyPlaying
                       ? "bg-[#161618] border-accent-blue shadow-lg ring-1 ring-accent-blue/40"
@@ -506,7 +528,7 @@ export default function Courses({ isStandalonePage = false, onBackToHome }: Cour
                     </div>
 
                     {/* Actions Right Side */}
-                    <div className="flex items-center gap-2 justify-end shrink-0 pt-2 md:pt-0 border-t md:border-t-0 border-white/5">
+                    <div className="flex items-center gap-2 justify-end shrink-0 pt-2 md:pt-0 border-t md:border-t-0 border-white/5 flex-wrap">
                       {lec.youtubeId ? (
                         <button
                           onClick={() => handlePlayLecture(lec, 0)}
@@ -527,6 +549,32 @@ export default function Courses({ isStandalonePage = false, onBackToHome }: Cour
                           <ExternalLink className="w-3 h-3 opacity-70" />
                         </a>
                       ) : null}
+
+                      {lec.pdfUrl && (
+                        <a
+                          href={lec.pdfUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 bg-rose-950/30 hover:bg-rose-950/50 text-rose-300 border border-rose-500/25 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer"
+                        >
+                          <FileText className="w-3.5 h-3.5" />
+                          <span>{language === "ar" ? "ملف PDF" : "PDF"}</span>
+                          <ExternalLink className="w-3 h-3 opacity-70" />
+                        </a>
+                      )}
+
+                      {lec.pageUrl && (
+                        <a
+                          href={lec.pageUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 bg-emerald-950/30 hover:bg-emerald-950/50 text-emerald-300 border border-emerald-500/25 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer"
+                        >
+                          <Globe className="w-3.5 h-3.5" />
+                          <span>{language === "ar" ? "عرض المادة" : "View Page"}</span>
+                          <ExternalLink className="w-3 h-3 opacity-70" />
+                        </a>
+                      )}
 
                       <button
                         onClick={() => toggleExpandLecture(lec.id)}
@@ -589,8 +637,10 @@ export default function Courses({ isStandalonePage = false, onBackToHome }: Cour
                     </div>
                   )}
                 </div>
+                </React.Fragment>
               );
-            })}
+            });
+          })()}
           </div>
         )}
       </div>

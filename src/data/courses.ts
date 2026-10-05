@@ -14,6 +14,9 @@ export interface Lecture {
   url?: string;
   youtubeId?: string;
   topics: TopicTimestamp[];
+  division?: "theoretical" | "practical";
+  pdfUrl?: string;
+  pageUrl?: string;
 }
 
 export interface Course {
@@ -1130,6 +1133,56 @@ export const COURSES_DATA: Course[] = [
         youtubeId: "0KQq4oyGgkA",
         topics: [
           { topicEn: "Video Recording, Project Presentation & Code Demonstration Guidelines", topicAr: "إرشادات تقديم واستعراض نتائج الموديل وتوثيقه مرئياً" },
+        ],
+      },
+    ],
+  },
+  {
+    id: "artificial-intelligence-intro",
+    code: "CS401",
+    titleEn: "Artificial Intelligence: An Introduction",
+    titleAr: "الذكاء الاصطناعي: مقدمة",
+    levelEn: "3rd Year Undergraduate",
+    levelAr: "المرحلة الثالثة - بكالوريوس",
+    departmentEn: "Department of Computer Science / Information Technology",
+    departmentAr: "قسم علوم الحاسبات / تكنولوجيا المعلومات",
+    institutionEn: "University of Thi-Qar",
+    institutionAr: "جامعة ذي قار",
+    descriptionEn: "A comprehensive introduction to Artificial Intelligence covering foundational theoretical concepts alongside hands-on practical Python programming sessions. The course covers AI history, intelligent agents, search algorithms, knowledge representation, and applied Python basics for AI.",
+    descriptionAr: "مساق دراسي شامل في الذكاء الاصطناعي يجمع بين الجانب النظري المتعمق والتطبيق العملي ببرمجة بايثون. يغطي الكورس تاريخ الذكاء الاصطناعي، العملاء الأذكياء، خوارزميات البحث، تمثيل المعرفة، وأساسيات بايثون التطبيقية.",
+    youtubePlaylistUrl: "https://www.youtube.com/@new_ur_academy",
+    lectures: [
+      {
+        id: "ai-lec1-theo",
+        number: 1,
+        division: "theoretical",
+        titleEn: "Lecture 1: Introduction to Artificial Intelligence",
+        titleAr: "المحاضرة 1: مقدمة في الذكاء الاصطناعي",
+        url: "https://youtu.be/VdtuR6m9c94?si=etucmlS0vmyScXCr",
+        youtubeId: "VdtuR6m9c94",
+        pdfUrl: "/materials/ai-intro/lec1-theoretical.pdf",
+        topics: [
+          { topicEn: "What is Artificial Intelligence? Definitions and Scope", topicAr: "ما هو الذكاء الاصطناعي؟ التعريفات والنطاق" },
+          { topicEn: "History and Milestones of AI Development", topicAr: "تاريخ الذكاء الاصطناعي ومحطاته الكبرى" },
+          { topicEn: "Branches of AI: Search, Knowledge, Learning, Perception", topicAr: "فروع الذكاء الاصطناعي: البحث، المعرفة، التعلم، الإدراك" },
+          { topicEn: "Intelligent Agents: Structure and Environment Types", topicAr: "العملاء الأذكياء: البنية وأنواع البيئات" },
+          { topicEn: "Real-World Applications of AI", topicAr: "التطبيقات الحقيقية للذكاء الاصطناعي في العالم" },
+        ],
+      },
+      {
+        id: "ai-lec1-prac",
+        number: 1,
+        division: "practical",
+        titleEn: "Practical Session 1: Python Basics Workshop",
+        titleAr: "الجلسة العملية 1: ورشة أساسيات بايثون",
+        pageUrl: "/materials/ai-intro/practical-lec1.html",
+        topics: [
+          { topicEn: "Installing Python and Anaconda Environment", topicAr: "تنصيب بايثون وبيئة أناكوندا" },
+          { topicEn: "Variables, Numbers, and Basic Arithmetic", topicAr: "إسناد المتغيرات والأعداد والحسابات الأساسية" },
+          { topicEn: "Libraries: math, random, numpy", topicAr: "المكتبات: math و random و numpy" },
+          { topicEn: "Slicing, Lists, Tuples, Ranges, Strings, Sets, Dictionaries", topicAr: "التقطيع، القوائم، المزدوجات، المديات، النصوص، المجموعات، القواميس" },
+          { topicEn: "Control Flow: if / for / List Comprehension / Functions", topicAr: "التحكم بالتدفق: if و for وشمولية القائمة والدوال" },
+          { topicEn: "File Reading and Writing", topicAr: "القراءة والكتابة من الملفات" },
         ],
       },
     ],

@@ -1,0 +1,759 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ورشة عمل: أساسيات بايثون — الجلسة العملية 1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Noto+Kufi+Arabic:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+  <style>
+    :root {
+      --bg: #0d0e10;
+      --bg-card: #111214;
+      --bg-code: #161820;
+      --border: rgba(255,255,255,0.07);
+      --accent: #3b82f6;
+      --accent-light: #60a5fa;
+      --text: #d4d8e2;
+      --text-muted: #6b7280;
+      --text-heading: #f1f5f9;
+      --green: #34d399;
+      --yellow: #fbbf24;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Kufi Arabic', 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    /* ── Header ─────────────────────────────────────────────────── */
+    .page-header {
+      background: linear-gradient(135deg, #0f172a 0%, #111214 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 2rem 1.5rem;
+      text-align: right;
+    }
+    .page-header .breadcrumb {
+      font-size: 11px;
+      font-family: 'IBM Plex Mono', monospace;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+    .page-header .breadcrumb span { color: var(--accent-light); }
+    .course-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(59,130,246,0.12);
+      border: 1px solid rgba(59,130,246,0.3);
+      color: var(--accent-light);
+      font-size: 11px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      margin-bottom: 0.75rem;
+    }
+    .page-header h1 {
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      font-weight: 700;
+      color: var(--text-heading);
+      line-height: 1.3;
+    }
+    .page-header .subtitle {
+      color: var(--text-muted);
+      font-size: 13px;
+      margin-top: 0.4rem;
+      font-family: 'Inter', sans-serif;
+    }
+    .page-header .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      justify-content: flex-end;
+    }
+    .meta-tag {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    /* ── Layout ──────────────────────────────────────────────────── */
+    .content-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 5rem;
+    }
+
+    /* ── Typography (Arabic RTL) ─────────────────────────────────── */
+    h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      margin: 2.5rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    h2::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 1.2em;
+      background: var(--accent);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--accent-light);
+      margin: 2rem 0 0.75rem;
+    }
+    h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--yellow);
+      margin: 1.5rem 0 0.5rem;
+    }
+    p { margin-bottom: 0.9rem; }
+    ul, ol {
+      padding-right: 1.5rem;
+      padding-left: 0;
+      margin-bottom: 0.9rem;
+    }
+    li { margin-bottom: 0.4rem; }
+    strong { color: var(--text-heading); font-weight: 600; }
+    a { color: var(--accent-light); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+
+    /* ── Blockquote ──────────────────────────────────────────────── */
+    blockquote {
+      border-right: 3px solid var(--accent);
+      border-left: none;
+      background: rgba(59,130,246,0.06);
+      padding: 0.75rem 1rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1rem 0;
+      color: #94a3b8;
+      font-size: 13.5px;
+    }
+    blockquote strong { color: var(--accent-light); }
+
+    /* ── Code blocks (LTR) ───────────────────────────────────────── */
+    .code-block-wrap {
+      direction: ltr;
+      text-align: left;
+      margin: 1rem 0 1.25rem;
+    }
+    .code-block-wrap pre {
+      background: var(--bg-code) !important;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 1.1rem 1.3rem;
+      overflow-x: auto;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .code-block-wrap code {
+      font-family: inherit;
+      font-size: inherit;
+    }
+    /* Inline code */
+    code:not(pre code) {
+      background: rgba(59,130,246,0.1);
+      border: 1px solid rgba(59,130,246,0.2);
+      color: var(--accent-light);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.85em;
+      padding: 1px 5px;
+      border-radius: 4px;
+      direction: ltr;
+      display: inline-block;
+    }
+
+    /* ── Tables ──────────────────────────────────────────────────── */
+    .table-wrap { overflow-x: auto; margin: 1rem 0 1.25rem; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+    th {
+      background: rgba(59,130,246,0.15);
+      color: var(--accent-light);
+      font-weight: 600;
+      padding: 0.6rem 0.9rem;
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+    td {
+      padding: 0.55rem 0.9rem;
+      border: 1px solid var(--border);
+      color: var(--text);
+      text-align: right;
+    }
+    td:first-child { text-align: center; font-family: 'IBM Plex Mono', monospace; color: var(--accent-light); }
+    tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+
+    /* ── Section number badge ────────────────────────────────────── */
+    .section-num {
+      display: inline-block;
+      background: rgba(59,130,246,0.15);
+      border: 1px solid rgba(59,130,246,0.3);
+      color: var(--accent);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 5px;
+      margin-left: 6px;
+    }
+
+    /* ── Summary table at end ────────────────────────────────────── */
+    .summary-table td:first-child { text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #94a3b8; }
+
+    /* ── TOC ─────────────────────────────────────────────────────── */
+    .toc {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .toc-title {
+      font-size: 13px;
+      font-family: 'IBM Plex Mono', monospace;
+      color: var(--accent-light);
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+    .toc ol { padding-right: 1.2rem; }
+    .toc li { font-size: 13px; margin-bottom: 0.3rem; }
+    .toc a { color: var(--text); }
+    .toc a:hover { color: var(--accent-light); }
+
+    /* ── Note box ────────────────────────────────────────────────── */
+    .note-box {
+      background: rgba(251,191,36,0.06);
+      border: 1px solid rgba(251,191,36,0.2);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+      font-size: 13.5px;
+      color: #cbd5e1;
+    }
+    .note-box strong { color: var(--yellow); }
+
+    @media (max-width: 640px) {
+      .content-wrap { padding: 1.5rem 1rem 4rem; }
+      h2 { font-size: 1.15rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Page Header ──────────────────────────────────────────────── -->
+<header class="page-header">
+  <div class="breadcrumb">
+    م. أحمد فاضل الموسوي &nbsp;/&nbsp;
+    <span>الذكاء الاصطناعي: مقدمة</span> &nbsp;/&nbsp; الجلسة العملية 1
+  </div>
+  <div class="course-badge">⚙ الجزء العملي — Practical</div>
+  <h1>أساسيات لغة بايثون</h1>
+  <p class="subtitle">Python Basics Workshop — Lecture 1 Practical</p>
+  <div class="meta">
+    <span class="meta-tag">قسم تكنولوجيا المعلومات</span>
+    <span class="meta-tag">جامعة ذي قار</span>
+    <span class="meta-tag">الذكاء الاصطناعي: مقدمة</span>
+  </div>
+</header>
+
+<!-- ── Content ──────────────────────────────────────────────────── -->
+<main class="content-wrap">
+
+  <p style="color:#94a3b8;font-size:13px;margin-bottom:1.5rem;">
+    <strong>ورشة عمل:</strong> مقدمة في البرمجة بلغة بايثون &nbsp;·&nbsp;
+    م. أحمد فاضل الموسوي &nbsp;·&nbsp;
+    قسم تكنولوجيا المعلومات — كلية علوم الحاسوب والرياضيات — جامعة ذي قار
+  </p>
+
+  <!-- Table of Contents -->
+  <nav class="toc">
+    <div class="toc-title">📋 محاور الورشة</div>
+    <ol>
+      <li><a href="#sec-install">التنصيب — Python و Anaconda</a></li>
+      <li><a href="#sec-vars">إسناد المتغيرات</a></li>
+      <li><a href="#sec-numbers">الأعداد والحسابات الأساسية</a></li>
+      <li><a href="#sec-underscore">الشارحة السفلية <code>_</code></a></li>
+      <li><a href="#sec-libs">المكتبات</a></li>
+      <li><a href="#sec-random">مكتبة <code>random</code></a></li>
+      <li><a href="#sec-logic">التعابير والمنطق</a></li>
+      <li><a href="#sec-slicing">التقطيع (Slicing)</a></li>
+      <li><a href="#sec-list">القائمة (List)</a></li>
+      <li><a href="#sec-tuple">المزدوجات (Tuple)</a></li>
+      <li><a href="#sec-range">المديات (Range)</a></li>
+      <li><a href="#sec-strings">السلاسل النصية (Strings)</a></li>
+      <li><a href="#sec-split">دالة <code>split</code></a></li>
+      <li><a href="#sec-set">المجموعات (Set)</a></li>
+      <li><a href="#sec-dict">القواميس (Dictionary)</a></li>
+      <li><a href="#sec-if">جملة <code>if</code> الشرطية</a></li>
+      <li><a href="#sec-for">جملة <code>for</code></a></li>
+      <li><a href="#sec-comprehension">شمولية القائمة (List Comprehension)</a></li>
+      <li><a href="#sec-functions">الدوال (Functions)</a></li>
+      <li><a href="#sec-files">القراءة والكتابة من الملفات</a></li>
+      <li><a href="#sec-summary">الخلاصة</a></li>
+    </ol>
+  </nav>
+
+  <div class="note-box">
+    <strong>ملاحظة:</strong> في الأمثلة أدناه، السطر الذي يبدأ بـ <code># →</code> يمثّل الناتج الذي يظهر عند تنفيذ السطر في بيئة تفاعلية مثل IPython أو Jupyter أو Spyder.
+  </div>
+
+  <!-- ══ Section 1: Installation ══════════════════════════════════ -->
+  <h2 id="sec-install"><span class="section-num">1</span> الجزء الأول: التنصيب</h2>
+
+  <h3>تنصيب بايثون</h3>
+  <ol>
+    <li>ادخل إلى الموقع الرسمي <a href="https://www.python.org" target="_blank">python.org</a> (أو ابحث في Google عن <em>download python</em>).</li>
+    <li>من قائمة <strong>Downloads</strong> اختر <strong>Windows</strong> ثم حمّل أحدث إصدار من Python 3 (ملف <em>Windows x86-64 executable installer</em>).</li>
+    <li>شغّل ملف التنصيب، وفعّل خيار <strong>Add Python to PATH</strong> قبل الضغط على <strong>Install Now</strong>، ثم انتظر حتى تظهر رسالة <strong>Setup was successful</strong>.</li>
+  </ol>
+
+  <h3>تنصيب أناكوندا (Anaconda)</h3>
+  <p>أناكوندا توزيعة جاهزة تضم بايثون مع أشهر المكتبات العلمية (مثل <code>numpy</code>) وأدوات مثل <strong>Spyder</strong> و <strong>Jupyter Notebook</strong>، لذا فهي الخيار الأسهل للمبتدئين.</p>
+  <ol>
+    <li>ادخل إلى موقع <a href="https://www.anaconda.com" target="_blank">anaconda.com</a> واختر <strong>Anaconda Distribution</strong>.</li>
+    <li>اختر نظام التشغيل <strong>Windows</strong> ثم حمّل نسخة <strong>Python 3</strong> (‏64-Bit Graphical Installer).</li>
+    <li>شغّل ملف التنصيب واضغط <strong>Next</strong> ثم <strong>I Agree</strong>، واختر <strong>Just Me</strong> ومسار التنصيب.</li>
+    <li>في الخيارات المتقدمة اترك الإعدادات الافتراضية واضغط <strong>Install</strong> — هذه المرحلة تستغرق بعض الوقت.</li>
+    <li>بعد الانتهاء اضغط <strong>Finish</strong>، وستجد Anaconda Navigator و Spyder في قائمة ابدأ.</li>
+  </ol>
+
+  <hr />
+
+  <!-- ══ Section 2: Variables ══════════════════════════════════════ -->
+  <h2 id="sec-vars"><span class="section-num">2</span> إسناد المتغيرات</h2>
+  <p>المتغير هو اسم نخزّن فيه قيمة. في بايثون لا نحتاج إلى التصريح عن نوع المتغير، فاللغة تستنتج النوع تلقائياً من القيمة المُسندة.</p>
+  <div class="code-block-wrap"><pre><code class="language-python">x = 10
+x
+# → 10
+
+type(x)
+# → int
+
+name = "ali"
+name
+# → 'ali'
+
+type(name)
+# → str</code></pre></div>
+  <ul>
+    <li>أسندنا القيمة <code>10</code> إلى المتغير <code>x</code>، فأصبح نوعه <code>int</code> (عدد صحيح).</li>
+    <li>أسندنا النص <code>"ali"</code> إلى المتغير <code>name</code>، فأصبح نوعه <code>str</code> (سلسلة نصية).</li>
+    <li>الدالة <code>type()</code> تُرجع نوع أي متغير.</li>
+  </ul>
+  <p>الدالة <code>dir()</code> تعرض كل الدوال (الطرق) التي يمكن تطبيقها على المتغير:</p>
+  <div class="code-block-wrap"><pre><code class="language-python">dir(name)
+# → [..., 'capitalize', 'count', 'find', 'lower', 'replace', 'split', 'upper', ...]
+
+name.upper()
+# → 'ALI'</code></pre></div>
+
+  <!-- ══ Section 3: Numbers ════════════════════════════════════════ -->
+  <h2 id="sec-numbers"><span class="section-num">3</span> الأعداد والحسابات الأساسية</h2>
+  <div class="code-block-wrap"><pre><code class="language-python">1 + 1      # → 2
+5 * 3      # → 15
+5 ** 2     # → 25
+15 / 5     # → 3.0
+15 / 7     # → 2.142857142857143
+15 // 7    # → 2</code></pre></div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>العامل</th><th>المعنى</th></tr></thead>
+      <tbody>
+        <tr><td><code>+</code></td><td>الجمع</td></tr>
+        <tr><td><code>*</code></td><td>الضرب</td></tr>
+        <tr><td><code>**</code></td><td>الأُس (القوة)، فـ <code>5**2</code> تعني خمسة تربيع</td></tr>
+        <tr><td><code>/</code></td><td>القسمة العادية، وناتجها دائماً عدد عشري <code>float</code> حتى لو كانت القسمة تامة</td></tr>
+        <tr><td><code>//</code></td><td>القسمة الصحيحة، تُرجع الجزء الصحيح فقط وتحذف الكسر</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ══ Section 4: Underscore ════════════════════════════════════ -->
+  <h2 id="sec-underscore"><span class="section-num">4</span> استخدام الشارحة السفلية <code>_</code></h2>
+  <p>في البيئة التفاعلية، يحتفظ الرمز <code>_</code> دائماً بـ <strong>آخر ناتج</strong> ظهر على الشاشة:</p>
+  <div class="code-block-wrap"><pre><code class="language-python">6 * 2.5    # → 15.0
+_ / 2.5    # → 6.0     (15.0 / 2.5)
+_          # → 6.0
+_ + 20     # → 26.0    (6.0 + 20)
+_ / 2      # → 13.0    (26.0 / 2)</code></pre></div>
+  <blockquote>هذه الميزة تعمل فقط في البيئة التفاعلية (مثل IPython أو الطرفية)، وليس داخل ملف بايثون يُنفَّذ كاملاً.</blockquote>
+
+  <!-- ══ Section 5: Libraries ══════════════════════════════════════ -->
+  <h2 id="sec-libs"><span class="section-num">5</span> المكتبات</h2>
+  <p>المكتبة مجموعة جاهزة من الدوال نستدعيها بالأمر <code>import</code> بدلاً من كتابتها بأنفسنا.</p>
+  <div class="code-block-wrap"><pre><code class="language-python">import math
+
+math.factorial(3)        # → 6
+math.pi                  # → 3.141592653589793
+math.sqrt(16)            # → 4.0
+math.sin(math.pi / 2)    # → 1.0</code></pre></div>
+  <p>يمكن استدعاء عنصر واحد فقط من المكتبة:</p>
+  <div class="code-block-wrap"><pre><code class="language-python">from math import pi
+
+pi
+# → 3.141592653589793</code></pre></div>
+  <p>ويمكن إعطاء المكتبة اسماً مختصراً بالكلمة <code>as</code>:</p>
+  <div class="code-block-wrap"><pre><code class="language-python">import numpy as np
+
+np.sqrt(16)
+# → 4.0
+
+np.sqrt([1, 2, 3, 4])
+# → array([1.        , 1.41421356, 1.73205081, 2.        ])</code></pre></div>
+
+  <!-- ══ Section 6: random ══════════════════════════════════════════ -->
+  <h2 id="sec-random"><span class="section-num">6</span> استدعاء مكتبة <code>random</code></h2>
+  <p>مكتبة <code>random</code> تولّد قيماً عشوائية. الدالة <code>random.choice()</code> تختار عنصراً واحداً عشوائياً من قائمة.</p>
+  <div class="code-block-wrap"><pre><code class="language-python">import random
+
+random.choice([1, 2, 3, 4, 5])
+# → 5
+
+names = ['ahmad', 'ali', 'kadhim']
+
+random.choice(names)    # → 'kadhim'
+random.choice(names)    # → 'ahmad'
+random.choice(names)    # → 'ahmad'
+random.choice(names)    # → 'kadhim'</code></pre></div>
+
+  <!-- ══ Section 7: Logic ══════════════════════════════════════════ -->
+  <h2 id="sec-logic"><span class="section-num">7</span> التعابير والمنطق</h2>
+  <h4>الإسناد</h4>
+  <div class="code-block-wrap"><pre><code class="language-python">x = 5
+x       # → 5
+
+y = x
+y       # → 5
+
+x = 3
+y       # → 5   (لم يتغير)
+
+x = y
+x       # → 5</code></pre></div>
+
+  <h4>المقارنات المنطقية</h4>
+  <div class="code-block-wrap"><pre><code class="language-python">2 < 4      # → True
+2 <= 4     # → True
+2 == 2     # → True
+2 != 2     # → False</code></pre></div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>العامل</th><th>المعنى</th></tr></thead>
+      <tbody>
+        <tr><td><code>&lt;</code></td><td>أصغر من</td></tr>
+        <tr><td><code>&lt;=</code></td><td>أصغر من أو يساوي</td></tr>
+        <tr><td><code>==</code></td><td>يساوي (للمقارنة)</td></tr>
+        <tr><td><code>!=</code></td><td>لا يساوي</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="code-block-wrap"><pre><code class="language-python">[2, 3] == [3, 2]   # → False   (ترتيب مختلف)
+
+2 == 2.0           # → True    (القيمة متساوية رغم اختلاف النوع)
+type(2)            # → int
+type(2.0)          # → float</code></pre></div>
+
+  <!-- ══ Section 8: Slicing ════════════════════════════════════════ -->
+  <h2 id="sec-slicing"><span class="section-num">8</span> التقطيع (Slicing)</h2>
+  <div class="code-block-wrap"><pre><code class="language-python">s = 'ahmad'
+s          # → 'ahmad'
+
+s[0]       # → 'a'
+s[-1]      # → 'd'
+s[0:2]     # → 'ah'</code></pre></div>
+  <p>الصيغة العامة للتقطيع هي <code>[البداية:النهاية:الخطوة]</code>:</p>
+  <div class="code-block-wrap"><pre><code class="language-python">r = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+r[0:len(r):2]
+# → [1, 3, 5, 7, 9]
+
+r[1:len(r):2]
+# → [2, 4, 6, 8, 10]</code></pre></div>
+
+  <!-- ══ Section 9: List ═══════════════════════════════════════════ -->
+  <h2 id="sec-list"><span class="section-num">9</span> القائمة (List)</h2>
+  <p>القائمة مجموعة <strong>مرتّبة وقابلة للتعديل</strong> من العناصر، تُكتب بين قوسين مربعين <code>[ ]</code>.</p>
+  <div class="code-block-wrap"><pre><code class="language-python">number = [9, 1, 5, 3, 4, 2]
+
+number[0]      # → 9
+
+number.append(10)
+number         # → [9, 1, 5, 3, 4, 2, 10]
+
+x = [1, 5, 3, 4]
+w = number + x # → [9, 1, 5, 3, 4, 2, 10, 1, 5, 3, 4]
+
+w.reverse()
+w              # → [4, 3, 5, 1, 10, 2, 4, 3, 5, 1, 9]
+
+w.sort()
+w              # → [1, 1, 2, 3, 3, 4, 4, 5, 5, 9, 10]</code></pre></div>
+  <div class="code-block-wrap"><pre><code class="language-python">names = ['muna', 'emad', 'ahmad', 'ali', 'kadhim']
+names.sort()
+names          # → ['ahmad', 'ali', 'emad', 'kadhim', 'muna']</code></pre></div>
+
+  <!-- ══ Section 10: Tuple ═════════════════════════════════════════ -->
+  <h2 id="sec-tuple"><span class="section-num">10</span> المزدوجات / الصفوف (Tuple)</h2>
+  <p>الـ Tuple يشبه القائمة لكنه <strong>غير قابل للتعديل</strong>، ويُكتب بين قوسين دائريين <code>( )</code>.</p>
+  <div class="code-block-wrap"><pre><code class="language-python">t = (1, 2, 3, 4, 5)
+
+type(t)          # → tuple
+len(t)           # → 5
+t + (9, 11)      # → (1, 2, 3, 4, 5, 9, 11)
+t[0]             # → 1
+t[-1]            # → 5</code></pre></div>
+  <h4>مثال عملي: الإحداثيات</h4>
+  <div class="code-block-wrap"><pre><code class="language-python">coordinate = (244, 235)
+type(coordinate)    # → tuple
+
+(c1, c2) = coordinate
+c1                  # → 244
+c2                  # → 235</code></pre></div>
+  <h4>انتبه: الفاصلة هي التي تصنع الـ tuple</h4>
+  <div class="code-block-wrap"><pre><code class="language-python">c = (2)
+type(c)     # → int      ← مجرد عدد بين قوسين
+
+c = (2,)
+type(c)     # → tuple    ← الفاصلة ضرورية!</code></pre></div>
+
+  <!-- ══ Section 11: Range ═════════════════════════════════════════ -->
+  <h2 id="sec-range"><span class="section-num">11</span> المديات (Range)</h2>
+  <div class="code-block-wrap"><pre><code class="language-python">range(10)
+# → range(0, 10)
+
+m = range(10)
+type(m)     # → range
+m[0]        # → 0
+m[1]        # → 1</code></pre></div>
+
+  <!-- ══ Section 12: Strings ══════════════════════════════════════ -->
+  <h2 id="sec-strings"><span class="section-num">12</span> السلاسل النصية (Strings)</h2>
+  <div class="code-block-wrap"><pre><code class="language-python">'hello' + 'world'   # → 'helloworld'
+
+s = 'python'
+s + s               # → 'pythonpython'
+3 * s               # → 'pythonpythonpython'
+
+'eight = ' + str(8) # → 'eight = 8'
+
+s.replace('p', 's') # → 'sython'</code></pre></div>
+
+  <!-- ══ Section 13: split ══════════════════════════════════════════ -->
+  <h2 id="sec-split"><span class="section-num">13</span> دالة <code>split</code></h2>
+  <div class="code-block-wrap"><pre><code class="language-python">s = 'python'
+
+y = s.split('t')
+y               # → ['py', 'hon']
+
+s               # → 'python'   (لم يتغير)
+
+y[0].upper()    # → 'PY'</code></pre></div>
+  <blockquote>إذا استدعيت <code>split()</code> بدون معامل، فإنها تقسّم النص عند المسافات — الأشيع لتقسيم جملة إلى كلمات.</blockquote>
+
+  <!-- ══ Section 14: Set ═══════════════════════════════════════════ -->
+  <h2 id="sec-set"><span class="section-num">14</span> المجموعات (Set)</h2>
+  <p>المجموعة تحتوي على عناصر <strong>غير مكررة وغير مرتّبة</strong>.</p>
+  <div class="code-block-wrap"><pre><code class="language-python">ids = set([1, 2, 3, 4, 5, 6, 7, 8, 9])
+ids.add(2)    # لا تأثير — 2 موجود أصلاً
+ids.remove(9)
+ids           # → {1, 2, 3, 4, 5, 6, 7, 8}
+
+odds  = set([1, 3, 5, 7, 9])
+evens = ids - odds       # الفرق
+union = evens | odds     # الاتحاد
+inter = union & set([1, 5, 6])   # التقاطع  → {1, 5, 6}</code></pre></div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>العامل</th><th>العملية</th></tr></thead>
+      <tbody>
+        <tr><td><code>-</code></td><td>الفرق</td></tr>
+        <tr><td><code>|</code></td><td>الاتحاد</td></tr>
+        <tr><td><code>&amp;</code></td><td>التقاطع</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="code-block-wrap"><pre><code class="language-python">letters = set('hello worlds')
+# → {' ', 'd', 'e', 'h', 'l', 'o', 'r', 's', 'w'}</code></pre></div>
+
+  <!-- ══ Section 15: Dictionary ════════════════════════════════════ -->
+  <h2 id="sec-dict"><span class="section-num">15</span> القواميس (Dictionary)</h2>
+  <div class="code-block-wrap"><pre><code class="language-python">age = {'ahmed': 29, 'ali': 31, 'dina': 27}
+
+age['ahmed']       # → 29
+age['ali'] + 1     # → 32
+
+age.keys()         # → dict_keys(['ahmed', 'ali', 'dina'])
+age.values()       # → dict_values([29, 31, 27])
+
+age['emad'] = 17   # إضافة عنصر جديد
+
+'tom' in age       # → False
+'ahmed' in age     # → True</code></pre></div>
+
+  <!-- ══ Section 16: if ═════════════════════════════════════════════ -->
+  <h2 id="sec-if"><span class="section-num">16</span> جملة <code>if</code> الشرطية</h2>
+  <div class="code-block-wrap"><pre><code class="language-python">x = 10
+y = 20
+
+if x > y:
+    print(x, ' is larger than ', y)
+else:
+    print(x, ' is smaller than ', y)
+
+# → 10  is smaller than  20</code></pre></div>
+  <h4>استخدام <code>elif</code> لأكثر من شرط</h4>
+  <div class="code-block-wrap"><pre><code class="language-python">if x > y:
+    absv = x - y
+elif y > x:
+    absv = y - x
+else:
+    absv = 0
+
+absv   # → 10</code></pre></div>
+
+  <!-- ══ Section 17: for ════════════════════════════════════════════ -->
+  <h2 id="sec-for"><span class="section-num">17</span> جملة <code>for</code> (الحلقة التكرارية)</h2>
+  <div class="code-block-wrap"><pre><code class="language-python">for i in range(10):
+    print(i)
+# → 0, 1, 2, ..., 9
+
+names = ['ahmad', 'ali', 'emad', 'muna', 'dina']
+for n in names:
+    print(n)</code></pre></div>
+  <h4>المرور على قاموس</h4>
+  <div class="code-block-wrap"><pre><code class="language-python">age = {'ahmed': 29, 'ali': 31, 'dina': 27, 'emad': 17}
+
+for n in sorted(age.keys()):
+    print(n, age[n])
+# → ahmed 29 | ali 31 | dina 27 | emad 17</code></pre></div>
+
+  <!-- ══ Section 18: List Comprehension ════════════════════════════ -->
+  <h2 id="sec-comprehension"><span class="section-num">18</span> شمولية القائمة (List Comprehension)</h2>
+  <div class="code-block-wrap"><pre><code class="language-python"># الطريقة التقليدية
+numbers = range(10)
+squares = []
+for num in numbers:
+    squares.append(num ** 2)
+
+# الطريقة المختصرة — في سطر واحد
+sqr2 = [num ** 2 for num in numbers]
+
+# كلتاهما تعطي: [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]</code></pre></div>
+
+  <!-- ══ Section 19: Functions ═════════════════════════════════════ -->
+  <h2 id="sec-functions"><span class="section-num">19</span> الدوال (Functions)</h2>
+  <div class="code-block-wrap"><pre><code class="language-python">def add(a, b):
+    sum = a + b
+    return sum
+
+add(9, 8)   # → 17
+
+q = add(10, 3)
+q           # → 13</code></pre></div>
+  <h4>دالة تُرجع أكثر من قيمة</h4>
+  <div class="code-block-wrap"><pre><code class="language-python">def sum_diff(a, b):
+    return (a + b, a - b)
+
+sum_diff(10, 4)   # → (14, 6)</code></pre></div>
+  <h4>مثال: تقاطع قائمتين</h4>
+  <div class="code-block-wrap"><pre><code class="language-python">def intersect(s1, s2):
+    res = []
+    for x in s1:
+        if x in s2:
+            res.append(x)
+    return res
+
+intersect([1, 2, 3, 4], [2, 4, 5])   # → [2, 4]</code></pre></div>
+  <h4>مثال: توليد كلمة مرور عشوائية</h4>
+  <div class="code-block-wrap"><pre><code class="language-python">import random
+
+def password(length):
+    pw = str()
+    char = "abcdefghijklmnopqrstuvwxyz"
+    for i in range(length):
+        pw = pw + random.choice(char)
+    return pw
+
+password(10)    # → 'ntzdotsvia'  (عشوائي في كل مرة)</code></pre></div>
+
+  <!-- ══ Section 20: File I/O ══════════════════════════════════════ -->
+  <h2 id="sec-files"><span class="section-num">20</span> القراءة والكتابة من الملفات</h2>
+  <div class="code-block-wrap"><pre><code class="language-python"># الكتابة
+with open('names.txt', 'w') as f:
+    f.write('ahmad\n')
+    f.write('ali\n')
+
+# الإضافة إلى نهاية الملف
+with open('names.txt', 'a') as f:
+    f.write('dina\n')
+
+# قراءة الملف كله
+with open('names.txt', 'r') as f:
+    content = f.read()
+
+print(content)
+# → ahmad
+# → ali
+# → dina
+
+# قراءة سطراً سطراً
+with open('names.txt', 'r') as f:
+    for line in f:
+        print(line.strip())</code></pre></div>
+
+  <!-- ══ Summary ════════════════════════════════════════════════════ -->
+  <h2 id="sec-summary"><span class="section-num">✓</span> الخلاصة</h2>
+  <div class="table-wrap">
+    <table class="summary-table">
+      <thead><tr><th>المفهوم</th><th>مثال</th></tr></thead>
+      <tbody>
+        <tr><td>متغير</td><td><div class="code-block-wrap" style="margin:0"><pre style="padding:4px 8px;border-radius:4px"><code class="language-python">x = 10</code></pre></div></td></tr>
+        <tr><td>قائمة (قابلة للتعديل)</td><td><div class="code-block-wrap" style="margin:0"><pre style="padding:4px 8px;border-radius:4px"><code class="language-python">[1, 2, 3]</code></pre></div></td></tr>
+        <tr><td>مزدوجة / tuple (ثابتة)</td><td><div class="code-block-wrap" style="margin:0"><pre style="padding:4px 8px;border-radius:4px"><code class="language-python">(1, 2, 3)</code></pre></div></td></tr>
+        <tr><td>مجموعة (بلا تكرار)</td><td><div class="code-block-wrap" style="margin:0"><pre style="padding:4px 8px;border-radius:4px"><code class="language-python">{1, 2, 3}</code></pre></div></td></tr>
+        <tr><td>قاموس (مفتاح: قيمة)</td><td><div class="code-block-wrap" style="margin:0"><pre style="padding:4px 8px;border-radius:4px"><code class="language-python">{'ali': 31}</code></pre></div></td></tr>
+        <tr><td>شرط</td><td><div class="code-block-wrap" style="margin:0"><pre style="padding:4px 8px;border-radius:4px"><code class="language-python">if / elif / else</code></pre></div></td></tr>
+        <tr><td>تكرار</td><td><div class="code-block-wrap" style="margin:0"><pre style="padding:4px 8px;border-radius:4px"><code class="language-python">for i in range(10):</code></pre></div></td></tr>
+        <tr><td>شمولية القائمة</td><td><div class="code-block-wrap" style="margin:0"><pre style="padding:4px 8px;border-radius:4px"><code class="language-python">[n**2 for n in range(10)]</code></pre></div></td></tr>
+        <tr><td>دالة</td><td><div class="code-block-wrap" style="margin:0"><pre style="padding:4px 8px;border-radius:4px"><code class="language-python">def add(a, b): return a + b</code></pre></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>
+
+<script>hljs.highlightAll();</script>
+</body>
+</html>
