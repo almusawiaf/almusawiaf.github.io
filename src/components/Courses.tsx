@@ -589,6 +589,33 @@ export default function Courses({ isStandalonePage = false, onBackToHome }: Cour
                   {/* Collapsible Topic Agenda */}
                   {isExpanded && (
                     <div className="border-t border-white/5 bg-[#111112]/90 p-4 md:p-5 space-y-3">
+
+                      {/* Referral notice for lectures that point to another course */}
+                      {lec.referralCourseId && (() => {
+                        const ref = COURSES_DATA.find(c => c.id === lec.referralCourseId);
+                        if (!ref) return null;
+                        return (
+                          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-emerald-950/20 border border-emerald-500/25 rounded-xl p-4">
+                            <div className="flex items-start gap-3">
+                              <BookMarked className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                              <p className="text-xs text-slate-300 leading-relaxed">
+                                {language === "ar"
+                                  ? <>للجانب العملي من هذا الكورس، يُرجى الرجوع إلى كورس <strong className="text-emerald-300">{ref.titleAr}</strong> المتوفر على هذا الموقع.</>
+                                  : <>For the practical part of this course, please refer to the <strong className="text-emerald-300">{ref.titleEn}</strong> course available on this website.</>
+                                }
+                              </p>
+                            </div>
+                            <button
+                              onClick={() => handleSelectCourse(lec.referralCourseId!)}
+                              className="inline-flex items-center gap-1.5 bg-emerald-900/40 hover:bg-emerald-800/50 text-emerald-300 border border-emerald-500/30 px-4 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer shrink-0"
+                            >
+                              <span>{language === "ar" ? "انتقل إلى الكورس" : "Go to Course"}</span>
+                              {isRTL ? <ArrowLeft className="w-3.5 h-3.5" /> : <ArrowRight className="w-3.5 h-3.5" />}
+                            </button>
+                          </div>
+                        );
+                      })()}
+
                       <div className="flex items-center gap-2 text-xs font-mono text-slate-400 uppercase tracking-wider">
                         <FileText className="w-3.5 h-3.5 text-accent-blue" />
                         <span>{t.courses.topicsLabel}</span>

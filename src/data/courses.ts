@@ -17,6 +17,7 @@ export interface Lecture {
   division?: "theoretical" | "practical";
   pdfUrl?: string;
   pageUrl?: string;
+  referralCourseId?: string;
 }
 
 export interface Course {
@@ -1173,10 +1174,10 @@ export const COURSES_DATA: Course[] = [
         id: "ai-lec1-prac",
         number: 1,
         division: "practical",
-        titleEn: "Practical Sessions: Python for Machine Learning (Full Course)",
-        titleAr: "الجلسات العملية: لغة بايثون لتطبيقات تعلم الآلة (الكورس الكامل)",
-        url: "https://www.youtube.com/@new_ur_academy",
+        titleEn: "Practical Sessions: Python for Machine Learning",
+        titleAr: "الجلسات العملية: لغة بايثون لتطبيقات تعلم الآلة",
         pageUrl: "/materials/ai-intro/practical-lec1.html",
+        referralCourseId: "python-for-machine-learning",
         topics: [
           { topicEn: "Installing Anaconda & Python Environment Setup", topicAr: "تثبيت Anaconda وإعداد بيئة بايثون" },
           { topicEn: "Python Variables, Basic Operations & Data Structures", topicAr: "المتغيرات، العمليات الأساسية، وتراكيب البيانات" },
