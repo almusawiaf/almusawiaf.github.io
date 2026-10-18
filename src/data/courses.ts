@@ -1171,6 +1171,23 @@ export const COURSES_DATA: Course[] = [
         ],
       },
       {
+        id: "ai-lec2-theo",
+        number: 2,
+        division: "theoretical",
+        titleEn: "Intelligent Agents and Environments",
+        titleAr: "العملاء الأذكياء والبيئات",
+        url: "https://youtu.be/-ZLkWJLvxhA?si=e26mXhDlR5XBNy5A&t=8",
+        youtubeId: "-ZLkWJLvxhA",
+        topics: [
+          { topicEn: "What is a Rational Agent?", topicAr: "ما هو العميل العقلاني؟" },
+          { topicEn: "PEAS Description: Performance, Environment, Actuators, Sensors", topicAr: "وصف PEAS: الأداء، البيئة، المشغلات، وأجهزة الاستشعار" },
+          { topicEn: "Properties of Task Environments", topicAr: "خصائص بيئات المهام" },
+          { topicEn: "Environment Types: Observable, Deterministic, Episodic, Static, Discrete", topicAr: "أنواع البيئات: القابلة للملاحظة، الحتمية، المتقطعة، الثابتة، المنفصلة" },
+          { topicEn: "Agent Structures: Simple Reflex, Model-Based, Goal-Based, Utility-Based", topicAr: "أنواع العملاء: ردود الفعل البسيطة، القائمة على النموذج، على الهدف، والمنفعة" },
+          { topicEn: "Learning Agents", topicAr: "عملاء التعلم" },
+        ],
+      },
+      {
         id: "ai-lec1-prac",
         number: 1,
         division: "practical",
